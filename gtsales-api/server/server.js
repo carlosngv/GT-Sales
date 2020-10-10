@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
-const router = require('./routes/routeIndex');
+const clientRouter = require('./routes/clientRoutes');
+const countryRoute = require('./routes/countryRoutes');
 
 app.use(express.json());
 app.use(morgan('dev'));
@@ -14,5 +15,6 @@ app.listen(app.get('port'), () => {
 });
 
 
-app.use(router); 
+app.use('/clients', clientRouter); 
+app.use('/countries', countryRoute); 
 
