@@ -1,1 +1,21 @@
-<p>header works!</p>
+<mat-toolbar class="toolbar">
+    <a class="logo-container" href="#">
+        <span>
+            <img class="logo" src="/assets/images/carrito-de-compras.png" height="40" widht="55">
+            GTSales
+        </span>
+    </a>
+    <span class="flex-spacer"></span>
+    <div fxHide.xs>
+        <a mat-button routerLink="/home" routerLinkActive="active">
+            <mat-icon>home</mat-icon>Home
+        </a>
+        <a mat-button routerLink="/home" routerLinkActive="active">
+            <mat-icon>login</mat-icon>Login
+        </a>
+        <a mat-button routerLink="/home" routerLinkActive="active">
+            <mat-icon>book_online</mat-icon>Sign Up
+        </a>
+    </div>
+
+</mat-toolbar>

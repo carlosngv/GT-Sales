@@ -1,3 +1,9 @@
+insert into clientp (client_name, client_lastname, client_username, client_password, client_email, client_birthday,
+      client_profile_picutre, client_credits_qty, client_country) 
+      values ('Kristel', 'Perez', 'krispe', '1234', 'krispz@hotmail.com', '22 AUG 1998',
+      'uploads/2020-10-10T08:06:20.906Zlogo_usac.png', '10000','2');
+select * from clientp;
+
 -- Country creation --
 create sequence country_seq START WITH 1 INCREMENT BY 1;
 
@@ -158,5 +164,141 @@ begin
   :new.purchase_id := purchase_seq.nextval;
 end;
 
+-- Purchase Detail
 
+create sequence purchase_detail_seq START WITH 1 INCREMENT BY 1;
+
+create table purchase_detail (
+    purchase_detail_id number,
+    product_id number,
+    purchase_id number,
+    product_qty number,
+    subtotal decimal(10,2),
+    primary key(purchase_detail_id),
+    foreign key (purchase_id) references purchase(purchase_id),
+    foreign key (product_id) references product(product_id)
+);
+
+create trigger purchase_detail_trigger
+before insert on purchase_detail
+for each row
+begin
+  :new.purchase_detail_id := purchase_detail_seq.nextval;
+end;
+
+------------------ PUBLICATION ----------------------------
+
+-- Publication
+
+create sequence publication_seq START WITH 1 INCREMENT BY 1;
+
+create table publication (
+    publication_id number,
+    product_id number,
+    client_id number,
+    primary key(publication_id),
+    foreign key (client_id) references clientp(client_id),
+    foreign key (product_id) references product(product_id)
+);
+
+create trigger publication_trigger
+before insert on publication
+for each row
+begin
+  :new.publication_id := publication_seq.nextval;
+end;
+
+
+-- Publication detail
+
+create sequence publication_detail_seq START WITH 1 INCREMENT BY 1;
+
+create table publication_detail (
+    publication_detail_id number,
+    publication_id number,
+    likes_qty number,
+    dislikes_qty number,
+    primary key(publication_detail_id),
+    foreign key (publication_id) references publication(publication_id)
+);
+
+create trigger publication_detail_trigger
+before insert on publication_detail
+for each row
+begin
+  :new.publication_detail_id := publication_detail_seq.nextval;
+end;
+
+
+-- Publication Comment
+
+create sequence publication_comment_seq START WITH 1 INCREMENT BY 1;
+
+create table publication_comment (
+    publication_comment_id number,
+    publication_comment_content varchar2(255),
+    publication_comment_date date,
+    client_id number,
+    publication_detail_id number,
+    primary key(publication_comment_id),
+    foreign key (client_id) references clientp(client_id),
+    foreign key (publication_detail_id) references publication_detail(publication_detail_id)
+
+);
+
+create trigger publication_comment_trigger
+before insert on publication_comment
+for each row
+begin
+  :new.publication_comment_id := publication_comment_seq.nextval;
+end;
+
+------------------ COMPLAINTS ----------------------------
+
+-- Complain
+
+create sequence complaint_seq START WITH 1 INCREMENT BY 1;
+
+create table complaint (
+    complaint_id number,
+    complaint_description varchar2(255),
+    complaint_date date,
+    complaint_blocked varchar2(10),
+    client_id number,
+    publication_detail_id number,
+    primary key(complaint_id),
+    foreign key (client_id) references clientp(client_id),
+    foreign key (publication_detail_id) references publication_detail(publication_detail_id)
+
+);
+
+create trigger complaint_trigger
+before insert on complaint
+for each row
+begin
+  :new.complaint_id := complaint_seq.nextval;
+end;
+
+
+------------------ ACTIONS (BITACORA) ----------------------------
+
+-- Action
+
+create sequence action_seq START WITH 1 INCREMENT BY 1;
+
+create table action (
+    action_id number,
+    action_description varchar2(255),
+    action_date date,
+    client_id number,
+    primary key(action_id), 
+    foreign key (client_id) references clientp(client_id)
+);
+
+create trigger action_trigger
+before insert on action
+for each row
+begin
+  :new.action_id := action_seq.nextval;
+end;
 

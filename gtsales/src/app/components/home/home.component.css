@@ -1,0 +1,15 @@
+.image-content {
+    border-radius: 50%;
+}
+
+.images-container {
+    margin: 40px;
+}
+
+mat-card {
+    background-color: #596275;
+}
+
+mat-expansion-panel {
+    background-color: #596275;
+}

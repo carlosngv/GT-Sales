@@ -1,0 +1,16 @@
+.toolbar {
+    background: #f5cd79;
+}
+.logo-container {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    margin: 10px;
+}
+.logo {
+    margin-top: 8px;
+}
+
+a {
+    color: black;
+}

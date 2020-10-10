@@ -1,4 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+    margin: 0 0 100px; /* bottom = footer height */
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 80px;
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.flex-spacer {
+    flex: 1 1 auto;
+}
+
+.container {
+    margin: 20px;
+}
