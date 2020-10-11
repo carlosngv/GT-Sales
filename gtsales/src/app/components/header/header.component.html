@@ -8,13 +8,13 @@
     <span class="flex-spacer"></span>
     <div fxHide.xs>
         <a mat-button routerLink="/home" routerLinkActive="active">
-            <mat-icon>home</mat-icon>Home
+            <mat-icon>home</mat-icon>Principal
         </a>
-        <a mat-button routerLink="/home" routerLinkActive="active">
-            <mat-icon>login</mat-icon>Login
+        <a mat-button (click)="openLoginForm()" routerLinkActive="active">
+            <mat-icon>login</mat-icon>Iniciar Sesión
         </a>
-        <a mat-button routerLink="/home" routerLinkActive="active">
-            <mat-icon>book_online</mat-icon>Sign Up
+        <a mat-button (click)="openSignupForm()" routerLinkActive="active">
+            <mat-icon>book_online</mat-icon>Registrate
         </a>
     </div>
 

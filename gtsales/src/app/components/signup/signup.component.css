@@ -1,0 +1,12 @@
+mat-toolbar {
+    background-color: #e15f41;
+    color: black;
+}
+
+
+
+form button {
+    background-color: #e15f41;
+    color: black;
+    width: 100%;
+}

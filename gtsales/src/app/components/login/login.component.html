@@ -1,0 +1,29 @@
+
+<div class="container" fxLayout="column" fxFlex="100%" fxLayoutAlign="center center">
+    <mat-toolbar>
+        Iniciar Sesión
+        <span class="flex-spacer"></span>
+        <button mat-button mat-dialog-close>&times;</button>
+    </mat-toolbar>
+    <br>
+    
+    <div fxFlex>
+        <form novalidate [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+            <p fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email" placeholder="Email" required>
+                </mat-form-field>
+                
+            </p>
+            <p fxLayout="space-between">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Contraseña</mat-label>
+                    <input type="password" matInput formControlName="password" placeholder="contraseña" required>
+                </mat-form-field>
+            </p>
+            <button type="submit" mat-button>Iniciar Sesión</button>
+            <a href="#">¿Olvidaste tú contraseña?<mat-icon>mood_bad</mat-icon></a>
+        </form>
+    </div>
+</div>

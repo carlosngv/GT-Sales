@@ -1,5 +1,5 @@
 .toolbar {
-    background: #f5cd79;
+    background: #e15f41;
 }
 .logo-container {
     text-decoration: none;
@@ -13,4 +13,9 @@
 
 a {
     color: black;
+}
+
+.panel-class {
+    background-color: blue;
+    color: green;
 }
