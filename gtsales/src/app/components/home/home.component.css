@@ -8,6 +8,7 @@
 
 mat-card {
     background-color: #596275;
+    border-radius: 10px;
 }
 
 mat-card:hover {
@@ -20,11 +21,13 @@ mat-expansion-panel {
 }
 
 .jumbotron {
+    background-color: #596275;
     margin: 0px auto;
     margin-left: 30px;
-    color:black;
+    color:white;
     min-height: 150px;
     padding: 10px;
+    border-radius: 10px;
 }
 .jumbotron:hover {
     transition: all 1s;

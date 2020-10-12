@@ -7,11 +7,14 @@
     <br>
     <div fxFlex>
         <h3>¡Empieza a vender/comprar!</h3>
-        <form novalidate [formGroup]="clientForm" (ngSubmit)="onSubmit()">
+        <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
             <p fxLayoutAlign="space-between">
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Nombre</mat-label>
                     <input type="text" matInput formControlName="firstname" placeholder="Nombre" required>
+                    <mat-error *ngIf="clientForm.get('firstname').hasError('required') && clientForm.get('firstname').hasError('touched')">
+                        El nombre es requerido.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Apellido</mat-label>
@@ -25,7 +28,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" color="accent">
                     <mat-label>Contraseña</mat-label>
-                    <input type="text" matInput formControlName="password" placeholder="Contraseña" required>
+                    <input type="password" matInput formControlName="password" placeholder="Contraseña" required>
                 </mat-form-field>
             </p>
             <p fxLayoutAlign="space-between">
@@ -44,7 +47,7 @@
                     <input type="text" matInput formControlName="country" placeholder="País" required>
                 </mat-form-field>
             </p>
-            <button type="submit" mat-button>Registrarse</button>
+            <button type="submit" mat-button [disabled]="clientForm.invalid">Registrarse</button>
         </form>
     </div>
 

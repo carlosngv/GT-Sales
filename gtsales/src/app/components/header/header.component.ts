@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
-
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { Client } from '../../shared/client'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -10,10 +12,19 @@ import { SignupComponent } from '../signup/signup.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public dialog:MatDialog) { }
+  client: Client;
+
+  constructor(public dialog:MatDialog,
+  public authService: AuthService,
+  public userService: UserService
+  ) { }
 
   ngOnInit(): void {
+    this.client = JSON.parse(localStorage['CurrentClient']);
+    console.log(this.client)
   }
+
+
 
   openSignupForm() {
     this.dialog.open(SignupComponent, {
@@ -27,5 +38,11 @@ export class HeaderComponent implements OnInit {
       height: '400px'
     })
   }
+
+  logout() {
+    this.authService.logout();
+  }
+
+  
 
 }

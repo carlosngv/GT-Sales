@@ -1,6 +1,9 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Client } from '../../shared/client';
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -9,20 +12,43 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   clientForm: FormGroup;
-  client = {
+  clientLog = {
     email: "",
     password: ""
   };
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<LoginComponent>) {
+  clients: Client[];
+  client: Client;
+
+  constructor(private fb: FormBuilder, 
+    public dialogRef: MatDialogRef<LoginComponent>, 
+    private authService: AuthService,
+    private router: Router,
+    @Inject('baseURL') private baseURL) {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+   
+  }
+
+  login(client_email, client_password) {
+    this.authService.login(client_email, client_password).subscribe( res => {
+      if(res['msg'] == 'true') {
+        this.client = res['client'];
+        console.log(this.client)
+        this.router.navigate(['profile', this.client['client_id']])
+        this.authService.storeUser(this.client);
+        console.log(this.client['client_id'])
+      } else {
+        console.log('no ok')
+      } 
+    })
+  }
 
   onSubmit() {
-    this.client = this.clientForm.value;
-    console.log(this.client)
+    this.clientLog = this.clientForm.value;
+    this.login(this.clientLog.email, this.clientLog.password);
     this.clientForm.reset();
     this.dialogRef.close(); // Dismiss the component when form is submitted
   }

@@ -10,11 +10,17 @@
         <a mat-button routerLink="/home" routerLinkActive="active">
             <mat-icon>home</mat-icon>Principal
         </a>
-        <a mat-button (click)="openLoginForm()" routerLinkActive="active">
+        <a mat-button (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
             <mat-icon>login</mat-icon>Iniciar Sesión
         </a>
-        <a mat-button (click)="openSignupForm()" routerLinkActive="active">
+        <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
             <mat-icon>book_online</mat-icon>Registrate
+        </a>
+        <a mat-button [routerLink]="['/profile', client['client_id']]" routerLinkActive="active" *ngIf="authService.isLogged()">
+            <mat-icon>face</mat-icon>Perfil
+        </a>
+        <a mat-button  (click)="logout()"routerLinkActive="active" *ngIf="authService.isLogged()">
+            Cerrar Sesión
         </a>
     </div>
 
