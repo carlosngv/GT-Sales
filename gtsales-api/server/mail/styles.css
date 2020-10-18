@@ -1,0 +1,21 @@
+nav {
+    color: black;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.row {
+    justify-content: center;
+}
+
+.col {
+    justify-content: center;
+
+}
+.btn {
+    background-color:#e15f41;
+    width: 100%;
+    color: black;
+}
