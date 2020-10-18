@@ -11,10 +11,6 @@ mailRouter.post("/sendmail", (req, res) => {
   });
 });
 
-function setEmail(email){
-    
-}
-
 async function sendMail(email, callback) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
@@ -26,9 +22,6 @@ async function sendMail(email, callback) {
       pass: "amarilda7junio",
     },
   });
-
-  setEmail(email);
-
   fs.readFile("./verification.html", { encoding: "utf-8" }, async function (err, html) {
     if (err) {
       console.log(err);
