@@ -28,3 +28,27 @@ mat-card-header img {
 mat-form-field {
     color: white;
 }
+
+mat-label {
+    color: white;
+}
+
+.client-name {
+    margin-top: 10px;
+    font-size: 55px;
+}
+
+
+
+.custom-file-upload {
+    background-color: #DDD;
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 100px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.custom-file-upload::-webkit-file-upload-button {
+    visibility: hidden;
+  }

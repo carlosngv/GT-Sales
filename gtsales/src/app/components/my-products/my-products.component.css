@@ -1,0 +1,8 @@
+a {
+    background: #ccc;
+}
+
+.img-container mat-grid-tile:hover {
+    transition: all 0.1s;
+    box-shadow: 1px 3px 10px 3px black;
+}

@@ -15,6 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -32,7 +33,8 @@ const MaterialComponents = [
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatDatepickerModule
 ];
 
 @NgModule({

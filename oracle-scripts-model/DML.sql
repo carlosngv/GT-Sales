@@ -1,8 +1,6 @@
-insert into clientp (client_name, client_lastname, client_username, client_password, client_email, client_birthday,
-      client_profile_picutre, client_credits_qty, client_country) 
-      values ('Kristel', 'Perez', 'krispe', '1234', 'krispz@hotmail.com', '22 AUG 1998',
-      'uploads/2020-10-10T08:06:20.906Zlogo_usac.png', '10000','2');
-select * from clientp;
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'YYYY-MM-DD';
+------------------------ TABLE CREATION ------------------------------------
 
 -- Country creation --
 create sequence country_seq START WITH 1 INCREMENT BY 1;
@@ -30,10 +28,10 @@ create table clientp (
     client_lastname varchar2(20) not null,
     client_username varchar2(20) not null,
     client_password varchar2(100) not null,
-    client_email varchar2(20) not null,
+    client_email varchar2(255) not null,
     client_birthday date not null,
     client_profile_picutre varchar2(255),
-    client_credits_qty number not null,
+    client_credits_qty number(10,2) not null,
     client_country  number,
     primary key(client_id),
     foreign key (client_country) references country(country_id)
@@ -133,6 +131,7 @@ create table product (
     product_detail varchar2(60),
     product_unit_price decimal(5,2),
     product_category number,
+    product_photo varchar(255),
     primary key(product_id),
     foreign key (product_category) references product_category(product_category_id)
 );
@@ -301,4 +300,40 @@ for each row
 begin
   :new.action_id := action_seq.nextval;
 end;
+
+
+
+
+-- DELETING TABLES ---
+
+drop table clientp;
+drop table action;
+drop table chat_room;
+drop table client_chat_room;
+drop table complaint;
+drop table country;
+drop table message;
+drop table product;
+drop table product_category;
+drop table publication;
+drop table publication_comment;
+drop table publication_detail;
+drop table purchase;
+drop table purchase_detail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

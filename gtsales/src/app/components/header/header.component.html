@@ -1,8 +1,8 @@
 <mat-toolbar class="toolbar">
     <a class="logo-container" href="#">
-        <span>
+        <span fxLayout="row" fxLayoutAlign="center center">
             <img class="logo" src="/assets/images/carrito-de-compras.png" height="40" widht="55">
-            GTSales
+            <h1>GTSales</h1>
         </span>
     </a>
     <span class="flex-spacer"></span>
@@ -16,8 +16,14 @@
         <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
             <mat-icon>book_online</mat-icon>Registrate
         </a>
+        <a mat-button routerLinkActive="active" *ngIf="authService.isLogged()">
+            <mat-icon>storefront</mat-icon> Tienda
+         </a>
+        <a mat-button [routerLink]="['/myProducts', client['client_id']]" *ngIf="authService.isLogged()">
+           <mat-icon>grid_on</mat-icon> Mis Productos
+        </a>
         <a mat-button [routerLink]="['/profile', client['client_id']]" routerLinkActive="active" *ngIf="authService.isLogged()">
-            <mat-icon>face</mat-icon>Perfil
+            <mat-icon>face</mat-icon> Perfil
         </a>
         <a mat-button  (click)="logout()"routerLinkActive="active" *ngIf="authService.isLogged()">
             Cerrar Sesión

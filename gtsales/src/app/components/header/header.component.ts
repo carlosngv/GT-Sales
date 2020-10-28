@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.client = JSON.parse(localStorage['CurrentClient']);
-    console.log(this.client)
   }
 
 

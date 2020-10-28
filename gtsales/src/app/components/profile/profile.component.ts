@@ -30,9 +30,7 @@ export class ProfileComponent implements OnInit {
   ) { 
     this.activatedRoute.params.pipe(switchMap((params: Params) => this.userService.getUser(params['id'])))
     .subscribe(client => {
-      console.log("PARAMS",client)
       this.client = client;
-      console.log(baseURL + client['client_profile_picture'])
       this.createForm();
     })
   }

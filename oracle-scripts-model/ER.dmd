@@ -5,4 +5,9 @@
 <ownerDesignName>ER</ownerDesignName>
 <capitalNames>false</capitalNames>
 <designId>B114D82B-4BC0-D4A2-BDBD-98445D9201A4</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="B114D82B-4BC0-D4A2-BDBD-98445D9201A4">
+<designStoragePath>/Users/carlosngv/Desktop/ER</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
 </OSDM_Design>

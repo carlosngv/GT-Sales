@@ -19,6 +19,12 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { baseURL } from './shared/baseURL';
 import { ProfileComponent } from './components/profile/profile.component';
+import { LoginValidationComponent } from './components/login-validation/login-validation.component';
+import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { MyProductsComponent } from './components/my-products/my-products.component';
+import { PublicationComponent } from './components/publication/publication.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { NewProductComponent } from './components/new-product/new-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +34,12 @@ import { ProfileComponent } from './components/profile/profile.component';
     LoginComponent,
     SignupComponent,
     ProfileComponent,
+    LoginValidationComponent,
+    EmailVerificationComponent,
+    MyProductsComponent,
+    PublicationComponent,
+    ProductDetailComponent,
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,

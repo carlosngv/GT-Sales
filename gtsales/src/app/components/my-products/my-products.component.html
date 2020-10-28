@@ -1,0 +1,27 @@
+<div class="container" fxLayout="column" >
+    <div fxFlex fxLayout="row">
+        <div>
+            <h1 class="mat-display-1">Mis Publicaciones</h1>
+        </div>
+        <span class="flex-spacer"></span>
+        <div>
+            <a mat-button color="basic" routerLinkActive="active">
+                <mat-icon>add</mat-icon>Publicar
+            </a>
+        </div>
+    </div>
+    <div fxFlex *ngIf="publications" class="img-container">
+        <mat-grid-list cols="2" rowHeight="200px" gutterSize="10px">
+            <mat-list fxFlex>
+                <mat-grid-tile *ngFor="let publication of publications" [routerLink]="['/productDetail', publication.publication_id]" appHighlight>
+                    <img height="340px" src="{{baseURL + publication.product_photo}}" alt={{publication.product_name}}>
+                    <mat-grid-tile-footer>
+                        <h1>{{publication.product_name | uppercase}}</h1>
+                        <span class="flex-spacer"></span>
+                        <h1>Precio: {{publication.product_unit_price}}</h1>
+                    </mat-grid-tile-footer>
+                </mat-grid-tile>
+            </mat-list>
+        </mat-grid-list>
+    </div>
+</div>
