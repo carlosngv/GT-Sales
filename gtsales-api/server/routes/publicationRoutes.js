@@ -92,6 +92,22 @@ publicationRouter.post(
       `;
     await db.Open(queryNewPublication, [idFound, client_id], true);
 
+    let queryPublicationID = ` 
+        select publication_id from publication where client_id =:client_id and product_id = :idFound
+    `  
+    let publicationID = await db.Open(queryPublicationID, [client_id, idFound], false);
+    let pubIDFound = 0;
+    publicationID.rows.map((id) => {
+        pubIDFound = id[0];
+    });
+    console.log(pubIDFound)
+
+    let queryNewPublicationDetail = `
+        insert into publication_detail (publication_id, likes_qty, dislikes_qty) values
+        (:pubIDFound, 0, 0)
+    `
+    await db.Open(queryNewPublicationDetail, [pubIDFound], true);
+
     res.json({
       message: "OK!",
     });
