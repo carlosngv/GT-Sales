@@ -19,7 +19,6 @@ clientRouter.get("/allClients", async (req, res) => {
   let query = "select * from clientp";
   let clients = await db.Open(query, [], false);
   clientArray = [];
-  console.log(clients);
   clients.rows.map((client) => {
     console.log(client);
     let clientSchema = {
@@ -191,7 +190,7 @@ clientRouter.patch(
     client_email=:client_email,
     client_birthday=:client_birthday,
     client_profile_picutre=:path,
-    client_country = (select country_id from country where country_name=:client_coutnry)
+    client_country = (select country_id from country where country_name=:client_country)
     where client_email=:client_email
   `;
 
