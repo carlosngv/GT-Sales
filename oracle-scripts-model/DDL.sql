@@ -86,11 +86,36 @@ p.product_name='Papas';
 
 select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
 p.product_unit_price from publication pub 
-join clientp c on c.client_id = pub.client_id
-join product p on pub.product_id = p.product_id;
+join clientp c on c.client_id >0
+join product p on pub.product_id = p.product_id where pub.publication_id = 3;
 
 select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name from publication pub 
 join clientp c on c.client_id = pub.client_id;
+
+select publication_id from publication where client_id = 101 and product_id = 35;
+
+select * from publication_detail where publication_id = 3;
+
+insert into publication_detail (publication_id, likes_qty, dislikes_qty) values(5, 0, 0);
+
+update publication_detail set likes_qty = 10, dislikes_qty=1 where publication_id=3;
+
+
+ALTER TABLE publication_comment 
+MODIFY publication_comment_date default sysdate not null;
+
+select * from publication_detail;
+
+insert into publication_comment (publication_comment_content, client_id
+, publication_detail_id) values ('Muy buen producto, recomendado!', 121, 1); 
+
+
+select * from publication_comment;
+select * from publication_comment where publication_detail_id=2;
+
+select c.client_name, c.client_lastname, pc.publication_comment_content, pc.publication_comment_date, pc.publication_detail_id 
+from clientp c, publication_comment pc where pc.client_id = c.client_id and pc.publication_detail_id = 2;
+
 
 
 

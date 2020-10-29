@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const moment = require("moment");
 const publicationRouter = Router();
 const db = require("../config/db");
 const multer = require("multer");
@@ -94,18 +95,22 @@ publicationRouter.post(
 
     let queryPublicationID = ` 
         select publication_id from publication where client_id =:client_id and product_id = :idFound
-    `  
-    let publicationID = await db.Open(queryPublicationID, [client_id, idFound], false);
+    `;
+    let publicationID = await db.Open(
+      queryPublicationID,
+      [client_id, idFound],
+      false
+    );
     let pubIDFound = 0;
     publicationID.rows.map((id) => {
-        pubIDFound = id[0];
+      pubIDFound = id[0];
     });
-    console.log(pubIDFound)
+    console.log(pubIDFound);
 
     let queryNewPublicationDetail = `
         insert into publication_detail (publication_id, likes_qty, dislikes_qty) values
         (:pubIDFound, 0, 0)
-    `
+    `;
     await db.Open(queryNewPublicationDetail, [pubIDFound], true);
 
     res.json({
@@ -118,10 +123,13 @@ publicationRouter.get("/:id", async (req, res) => {
   let { id } = req.params;
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
-        p.product_unit_price, p.product_photo from publication pub 
-        join clientp c on pub.client_id = :id
-        join product p on pub.product_id = p.product_id
+        p.product_unit_price, p.product_photo, pd.publication_detail_id from publication pub, product p, clientp c, publication_detail pd 
+        where pub.product_id = p.product_id and pub.client_id = :id and c.client_id = :id and pd.publication_id = pub.publication_id
+        
     `;
+
+  /*     join clientp c on pub.client_id = :id
+        inner join product p on pub.product_id = p.product_id */
   let publications = await db.Open(query, [id], false);
   let publicationArray = [];
   publications.rows.map((publication) => {
@@ -134,6 +142,7 @@ publicationRouter.get("/:id", async (req, res) => {
       product_detail: publication[5],
       product_unit_price: publication[6],
       product_photo: publication[7],
+      publication_detail_id: publication[8]
     };
     publicationArray.push(publicationSchema);
   });
@@ -146,9 +155,10 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
   let { publicationID } = req.params;
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
-        p.product_unit_price, p.product_photo from publication pub 
+        p.product_unit_price, p.product_photo, pd.likes_qty, pd.dislikes_qty, pd.publication_detail_id from publication pub 
         join clientp c on pub.client_id > 0
         join product p on pub.product_id = p.product_id
+        join publication_detail pd on pd.publication_id = pub.publication_id
         where pub.publication_id = :publicationID
     `;
   let publications = await db.Open(query, [publicationID], false);
@@ -163,11 +173,88 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
       product_detail: publication[5],
       product_unit_price: publication[6],
       product_photo: publication[7],
+      likes_qty: publication[8],
+      dislikes_qty: publication[9],
+      publication_detail_id: publication[10]
     };
     publicationArray.push(publicationSchema);
   });
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json(publicationArray[0]);
+});
+
+publicationRouter.patch("/publication/updateLikes", async (req, res) => {
+  const { likes, dislikes, publication_id } = req.body;
+  let query = ` 
+    update publication_detail set likes_qty = :likes, dislikes_qty=:dislikes where publication_id=:publication_id
+  `;
+
+  let currentStatus = 0;
+  await db.Open(query, [likes, dislikes, publication_id], true).then(
+    (res) => {
+      console.log(res);
+      currentStatus = 200;
+    },
+    (err) => {
+      console.log(err);
+      currentStatus = 400;
+    }
+  );
+
+  res.status(currentStatus).json({
+    message: "Information patched successfully!",
+  });
+});
+
+publicationRouter.post("/publication/addComment", async (req, res) => {
+  console.log(req.body);
+  const {
+    publication_comment_content,
+    client_id,
+    publication_detail_id,
+  } = req.body;
+  let query = `
+ insert into publication_comment (publication_comment_content, client_id, publication_detail_id)
+  values (:publication_comment_content, :client_id, :publication_detail_id)
+ `;
+
+ await db.Open(query, [publication_comment_content, client_id, publication_detail_id], true);
+
+res.status(200).json({
+      message: "OK!",
+    });
+
+});
+
+publicationRouter.get("/publication/:id/comments", async (req, res) => {
+  const { id } = req.params;
+  let query = `
+  select c.client_id, c.client_name, c.client_lastname, pc.publication_comment_content, pc.publication_comment_date, pc.publication_detail_id,
+  c.client_profile_picutre 
+  from clientp c, publication_comment pc where pc.client_id = c.client_id and pc.publication_detail_id = :id
+  
+  `; 
+   let comments = await db.Open(query, [id], false);
+  let commentArray = [];
+  comments.rows.map((comment) => {
+    let date = moment(comment[4])
+    let commentSchema = {
+      client_id: comment[0],
+      client_name: comment[1],
+      client_lastname: comment[2],
+      publication_comment_content: comment[3],
+      publication_comment_date: date.format("DD-MM-YYYY"),
+      publication_detail_id: comment[5],
+      client_profile_picture: comment[6]
+    }
+    commentArray.push(commentSchema);
+  }); 
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.json({
+    comments: commentArray
+  })
+
 });
 module.exports = publicationRouter;

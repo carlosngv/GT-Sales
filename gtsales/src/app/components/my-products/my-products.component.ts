@@ -21,7 +21,6 @@ export class MyProductsComponent implements OnInit {
       this.publications = publications;
       console.log(this.publications);
     })
-
     }
 
   ngOnInit(): void {

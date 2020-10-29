@@ -7,4 +7,7 @@ export class Publication {
     product_detail: string;
     product_unit_price: number;
     product_photo: string;
+    likes: number;
+    dislikes:number;
+    publication_detail_id: number;
 }

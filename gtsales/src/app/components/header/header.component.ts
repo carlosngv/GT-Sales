@@ -14,13 +14,16 @@ export class HeaderComponent implements OnInit {
 
   client: Client;
 
+
   constructor(public dialog:MatDialog,
   public authService: AuthService,
   public userService: UserService
-  ) { }
+  ) {
+    this.client = JSON.parse(localStorage['CurrentClient']);
+
+   }
 
   ngOnInit(): void {
-    this.client = JSON.parse(localStorage['CurrentClient']);
   }
 
 

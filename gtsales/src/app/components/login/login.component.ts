@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(client_email, client_password).subscribe((res) => {
       if (res["msg"] == "true") {
         this.client = res["client"];
-        console.log(this.client);
-        if (res["client_verified"] != null || res["client_verified"] == "false") {
+        console.log("CLIENT",this.client)
+        if (this.client["client_verified"] == "false") {
+          console.log('false');
           this.dialog.open(LoginValidationComponent, {
             width: "350px",
             height: "220px",
@@ -49,6 +50,12 @@ export class LoginComponent implements OnInit {
         this.authService.storeUser(this.client);
         console.log(this.client["client_id"]);
       } else {
+        console.log('false');
+          this.dialog.open(LoginValidationComponent, {
+            width: "350px",
+            height: "220px",
+          });
+          return;
         console.log("no ok");
       }
     });
