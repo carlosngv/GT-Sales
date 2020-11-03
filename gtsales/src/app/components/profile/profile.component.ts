@@ -1,10 +1,10 @@
 import { Component, OnInit,ViewChild, Inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Params, ActivatedRoute, Router } from '@angular/router';
-import { switchMap, switchMapTo } from 'rxjs/operators';
+import { Params, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { Client } from '../../shared/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {baseURL } from '../../shared/baseURL'
+import { BehaviorSubject } from 'rxjs';
 
 interface htmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -28,11 +28,17 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     @Inject('baseURL') public baseURL
   ) { 
-    this.activatedRoute.params.pipe(switchMap((params: Params) => this.userService.getUser(params['id'])))
+    this.getUser();
+  }
+
+  async getUser() {
+    let ready = new BehaviorSubject<boolean>(false);
+     this.activatedRoute.params.pipe(switchMap((params: Params) =>  this.userService.getUser(params['id'])))
     .subscribe(client => {
       this.client = client;
+      ready.next(true);
       this.createForm();
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -49,7 +55,7 @@ export class ProfileComponent implements OnInit {
       birthday: [(this.client['client_birthday']), Validators.required],
       country: [this.client['client_country'], Validators.required],
       credits: [this.client['client_credits_qty']]
-    })
+    });
   }
 
   onPhoto(event: htmlInputEvent) {

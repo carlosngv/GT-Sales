@@ -32,6 +32,8 @@ publicationRouter.get("/allPublications", async (req, res) => {
   res.json(publicationArray);
 });
 
+
+
 publicationRouter.post(
   "/newPublication",
   upload.single("image"),
@@ -118,6 +120,39 @@ publicationRouter.post(
     });
   }
 );
+
+publicationRouter.get("/others/:id", async (req, res) => {
+  let { id } = req.params;
+  let query = `
+        select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
+        p.product_unit_price, p.product_photo, pd.publication_detail_id, c.client_lastname from publication pub, product p, clientp c, publication_detail pd 
+        where pub.product_id = p.product_id and pub.client_id != :id and c.client_id = :id and pd.publication_id = pub.publication_id
+        
+    `;
+
+  /*     join clientp c on pub.client_id = :id
+        inner join product p on pub.product_id = p.product_id */
+  let publications = await db.Open(query, [id], false);
+  let publicationArray = [];
+  publications.rows.map((publication) => {
+    publicationSchema = {
+      publication_id: publication[0],
+      product_id: publication[1],
+      client_id: publication[2],
+      client_name: publication[3],
+      product_name: publication[4],
+      product_detail: publication[5],
+      product_unit_price: publication[6],
+      product_photo: publication[7],
+      publication_detail_id: publication[8],
+      client_lastname: publication[9]
+    };
+    publicationArray.push(publicationSchema);
+  });
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.json(publicationArray);
+});
 
 publicationRouter.get("/:id", async (req, res) => {
   let { id } = req.params;

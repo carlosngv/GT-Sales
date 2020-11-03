@@ -10,4 +10,5 @@ export class Publication {
     likes: number;
     dislikes:number;
     publication_detail_id: number;
+    client_lastname?: string;
 }

@@ -9,8 +9,8 @@ select * from country;
 ALTER TABLE clientp 
 ADD verified varchar2(20);
 
-ALTER TABLE clientp 
-MODIFY client_email Varchar2(255);
+ALTER TABLE product 
+MODIFY product_unit_price Number(10,2);
 
 insert into clientp (client_name, client_lastname, client_username, client_password, client_email, client_birthday,
       client_profile_picutre, client_credits_qty, client_country) 

@@ -6,7 +6,7 @@ import { baseURL } from '../shared/baseURL';
 import { ProcessHttpMsgService } from '../services/process-http-msg.service.service';
 import { Publication } from '../shared/publication';
 import { Comment } from '../shared/comment';
-
+import { Product } from '../shared/product'; 
 @Injectable({
   providedIn: 'root'
 })
@@ -20,9 +20,13 @@ export class PublicationService {
 
   getPublications(id): Observable<Publication[]> {
     return this.http.get<Publication[]>(baseURL + 'publications/' + id)
-    .pipe(catchError(this.processHttpMsgService.handleError)); // converted to a promise
+    .pipe(catchError(this.processHttpMsgService.handleError));
   }
 
+  getOthersPublications(id): Observable<Publication[]> {
+    return this.http.get<Publication[]>(baseURL + 'publications/others/' + id)
+    .pipe(catchError(this.processHttpMsgService.handleError));
+  }
   async getPublication(publicationID) {
     return await this.http.get<Publication>(baseURL + 'publications/publication/' + publicationID).toPromise();
   }
@@ -41,5 +45,16 @@ export class PublicationService {
     .pipe(catchError(this.processHttpMsgService.handleError));
   }
 
+  newProduct(product: Product): Observable<any> {
+    console.log(product);
+    const fd = new FormData();
+    fd.append('client_id', product.client_id);
+    fd.append('product_name', product.product_name);
+    fd.append('product_detail', product.product_detail);
+    fd.append('product_unit_price', product.product_unit_price);
+    fd.append('product_category', product.product_category);
+    fd.append('image', product.image);
+    return this.http.post(baseURL + 'publications/newPublication', fd)
+  }
 
 }

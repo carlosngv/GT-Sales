@@ -20,7 +20,7 @@
             <span class="flex-spacer">
 
             </span>
-            <button class="go-back" mat-button [routerLink]="['/myProducts',publication.client_id]">REGRESAR <mat-icon>
+            <button class="go-back" mat-button (click)="goBack()">REGRESAR <mat-icon>
                     keyboard_backspace</mat-icon></button>
 
         </mat-card>

@@ -1,1 +1,39 @@
-<p>new-product works!</p>
+<div class="container" fxLayout="column">
+    <mat-toolbar>
+        Publicación nueva
+        <span class="flex-spacer"></span>
+        <button mat-button mat-dialog-close>&times;</button>
+    </mat-toolbar>
+    <br>
+    <div fxFlex>
+        <form novalidate [formGroup]="productForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+            <p fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Nombre</mat-label>
+                    <input type="text" matInput formControlName="product_name" placeholder="Nombre" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Descripción</mat-label>
+                    <input type="text" matInput formControlName="product_detail" placeholder="Descripción" required>
+                </mat-form-field>
+            </p>
+            <p fxLayoutAlign="space-between">
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Categoria</mat-label>
+                    <input type="text" matInput formControlName="product_category" placeholder="Categoria" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" color="accent">
+                    <mat-label>Precio</mat-label>
+                    <input type="number" matInput formControlName="product_unit_price" placeholder="Precio" required>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-label>Subir foto</mat-label>
+                <br>
+                <input class="custom-file-upload" type="file" (change)="onPhoto($event)">
+            </p>
+            <button type="submit" class="submitButton" mat-button [disabled]="productForm.invalid">Publicar</button>
+        </form>
+    </div>
+
+</div>

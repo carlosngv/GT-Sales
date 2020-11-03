@@ -25,6 +25,7 @@ import { MyProductsComponent } from './components/my-products/my-products.compon
 import { PublicationComponent } from './components/publication/publication.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
+import { ProductsComponent } from './components/products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { NewProductComponent } from './components/new-product/new-product.compon
     PublicationComponent,
     ProductDetailComponent,
     NewProductComponent,
+    ProductsComponent,
   ],
   imports: [
     BrowserModule,

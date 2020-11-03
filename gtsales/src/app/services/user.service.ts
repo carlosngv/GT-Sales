@@ -19,7 +19,7 @@ export class UserService {
 
   getUsers(): Observable<Client[]> {
     return this.http.get<Client[]>(baseURL + 'clients/allClients')
-    .pipe(catchError(this.processHttpMsgService.handleError)); // converted to a promise
+    .pipe(catchError(this.processHttpMsgService.handleError));
   }
   
   getUser(id): Observable<Client> {

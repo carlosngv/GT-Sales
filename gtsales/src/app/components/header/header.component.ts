@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
 import { AuthService } from '../../services/auth.service';
@@ -19,11 +19,11 @@ export class HeaderComponent implements OnInit {
   public authService: AuthService,
   public userService: UserService
   ) {
-    this.client = JSON.parse(localStorage['CurrentClient']);
-
+      this.client = JSON.parse(localStorage['CurrentClient']);
    }
 
   ngOnInit(): void {
+    
   }
 
 
@@ -35,9 +35,12 @@ export class HeaderComponent implements OnInit {
     })
   }
   openLoginForm() {
-    this.dialog.open(LoginComponent, {
+    const ref = this.dialog.open(LoginComponent, {
       width: '500px',
       height: '400px'
+    });
+    ref.afterClosed().subscribe(() => {
+      this.client = JSON.parse(localStorage['CurrentClient']);
     })
   }
 

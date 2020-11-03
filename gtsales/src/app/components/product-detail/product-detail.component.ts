@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from "@angular/core";
 import { PublicationService } from "../../services/publication.service";
 import { Params, ActivatedRoute, Router } from "@angular/router";
+import { Location } from '@angular/common'
 import { switchMap } from "rxjs/operators";
 import { Publication } from "../../shared/publication";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -31,6 +32,7 @@ export class ProductDetailComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
+    private location: Location,
     @Inject("baseURL") public baseURL
   ) {
     this.params = this.activatedRoute.snapshot.params.id;
@@ -69,6 +71,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  goBack() {
+    this.location.back();
+  }
 
   likePublication() {
     let updateSchema = {
