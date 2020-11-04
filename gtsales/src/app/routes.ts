@@ -8,9 +8,9 @@ import { ProductsComponent } from './components/products/products.component';
 import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
     { path: 'home', component: HomeComponent},
-    { path: 'profile/:id', component:ProfileComponent ,canActivate:[AuthGuard]},
-    { path: 'myProducts/:id', component:MyProductsComponent ,canActivate:[AuthGuard]},
-    { path: 'productDetail/:id/:pdid', component:ProductDetailComponent ,canActivate:[AuthGuard]},
-    { path: 'products/:id', component:ProductsComponent ,canActivate:[AuthGuard]},
+    { path: 'profile', component:ProfileComponent ,canActivate:[AuthGuard]},
+    { path: 'myProducts', component:MyProductsComponent ,canActivate:[AuthGuard]},
+    { path: 'productDetail', component:ProductDetailComponent ,canActivate:[AuthGuard]},
+    { path: 'products', component:ProductsComponent ,canActivate:[AuthGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

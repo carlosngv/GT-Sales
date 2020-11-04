@@ -5,6 +5,7 @@ import { switchMap } from "rxjs/operators";
 import { Publication } from "../../shared/publication";
 import { MatDialog } from "@angular/material/dialog";
 import { NewProductComponent } from '../new-product/new-product.component';
+import { Client } from '../../shared/client';
 @Component({
   selector: "app-my-products",
   templateUrl: "./my-products.component.html",
@@ -13,23 +14,18 @@ import { NewProductComponent } from '../new-product/new-product.component';
 export class MyProductsComponent implements OnInit {
   publications: Publication[];
   id: string;
+  client: Client;
   constructor(
     private publicationService: PublicationService,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     @Inject("baseURL") public baseURL
   ) {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    this.activatedRoute.params
-      .pipe(
-        switchMap((params: Params) =>
-          this.publicationService.getPublications(params["id"])
-        )
-      )
-      .subscribe((publications) => {
-        this.publications = publications;
-        console.log(this.publications);
-      });
+    this.client = JSON.parse(localStorage['CurrentClient']);
+    console.log('ID',this.client['client_id'])
+    this.publicationService.getPublications(this.client['client_id']).subscribe((publications) => {
+      this.publications = publications;
+    });
   }
 
   newPublication() {

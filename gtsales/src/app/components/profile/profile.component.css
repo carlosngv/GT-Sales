@@ -9,7 +9,7 @@ mat-card-content {
 button {
     background-color: #e15f41;
     color: black;
-    width: 100%;    
+    width: 84.5%;    
     margin-bottom: 20px;
 }
 
@@ -44,7 +44,7 @@ mat-label {
     background-color: #DDD;
     border: 1px solid #ccc;
     display: inline-block;
-    padding: 6px 100px;
+    padding: 6px 50px;
     cursor: pointer;
     border-radius: 5px;
 }

@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         console.log('CLIENT ID:',this.client["client_id"]);
-        this.router.navigate(["profile", this.client["client_id"]]);
+        this.router.navigate(["profile", '']);
         this.authService.storeUser(this.client);
         console.log(this.client["client_id"]);
       } else {

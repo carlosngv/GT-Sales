@@ -17,6 +17,7 @@ interface htmlInputEvent extends Event {
 export class ProfileComponent implements OnInit {
   clientForm: FormGroup;
   client: Client;
+  clientAux: Client;
   file: File;
   photoSelected: string | ArrayBuffer;
   @ViewChild('fform') clientFormDirective;
@@ -28,15 +29,9 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     @Inject('baseURL') public baseURL
   ) { 
-    this.getUser();
-  }
-
-  async getUser() {
-    let ready = new BehaviorSubject<boolean>(false);
-     this.activatedRoute.params.pipe(switchMap((params: Params) =>  this.userService.getUser(params['id'])))
-    .subscribe(client => {
-      this.client = client;
-      ready.next(true);
+    this.clientAux = JSON.parse(localStorage['CurrentClient']);
+    this.userService.getUser(this.clientAux['client_id']).subscribe((user) => {
+      this.client = user;
       this.createForm();
     });
   }

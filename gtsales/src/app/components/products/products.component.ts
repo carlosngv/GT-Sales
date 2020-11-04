@@ -3,7 +3,6 @@ import { Params, ActivatedRoute } from "@angular/router";
 import { switchMap } from "rxjs/operators";
 import { PublicationService } from "../../services/publication.service";
 import { Publication } from "../../shared/publication";
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -17,16 +16,11 @@ export class ProductsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     @Inject("baseURL") public baseURL
   ) { 
-    this.activatedRoute.params
-      .pipe(
-        switchMap((params: Params) =>
-          this.publicationService.getOthersPublications(params["id"])
-        )
-      )
-      .subscribe((publications) => {
-        this.publications = publications;
-        console.log(this.publications);
-      });
+    let idClient = JSON.parse(localStorage['CurrentClient'])['client_id'];
+    console.log('client_id',idClient)
+    this.publicationService.getOthersPublications(idClient).subscribe((publications) => {
+      this.publications = publications;
+    });
   }
 
   ngOnInit(): void {

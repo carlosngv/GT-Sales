@@ -16,13 +16,13 @@
         <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
             <mat-icon>book_online</mat-icon>Registrate
         </a>
-        <a mat-button [routerLink]="['/products', client['client_id']]" *ngIf="authService.isLogged()">
+        <a mat-button routerLink="/products" *ngIf="authService.isLogged()">
             <mat-icon>storefront</mat-icon> Tienda
          </a>
-        <a mat-button [routerLink]="['/myProducts', client['client_id']]" *ngIf="authService.isLogged()">
+        <a mat-button routerLink="/myProducts" *ngIf="authService.isLogged()">
            <mat-icon>grid_on</mat-icon> Mis Productos
         </a>
-        <a mat-button [routerLink]="['/profile', client['client_id']]" routerLinkActive="active" *ngIf="authService.isLogged()">
+        <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="authService.isLogged()">
             <mat-icon>face</mat-icon> Perfil
         </a>
         <a mat-button  routerLinkActive="active" *ngIf="authService.isLogged()">
