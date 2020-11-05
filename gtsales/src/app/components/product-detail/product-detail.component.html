@@ -1,53 +1,81 @@
-<div class="container" fxLayout="row" fxflex="100" fxLayout.sm="column" fxLayout.xs="column"
-    fxLayoutAlign="space-evenly center" fxLayoutGap="40px" fxLayoutGap.xs="30px">
-    <div fxFlex="50" *ngIf="publication">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>
-                    <p *ngIf="publication"><strong>{{publication.product_name | uppercase}}</strong></p>
-                    <h2 class="mat-title">{{publication.product_detail}}</h2>
-                    <h4 *ngIf="publication">Precio: Q.{{publication.product_unit_price}}</h4>
 
-                </mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="{{baseURL + publication.product_photo}}">
-            <button mat-button>
-                <mat-icon>shopping_cart</mat-icon>
-            </button>
-            <button (click)="likePublication()" mat-button [matBadge]="publication.likes_qty"
-                matBadgeColor="accent"><mat-icon>thumb_up</mat-icon></button>
-            <button mat-button (click)="dislikePublication()" [matBadge]="publication.dislikes_qty"
-                matBadgeColor="accent"><mat-icon>thumb_down</mat-icon></button>
-            <span class="flex-spacer">
 
-            </span>
-            <button class="go-back" mat-button (click)="goBack()">
-                <mat-icon>
-                    keyboard_backspace</mat-icon>
-            </button>
+<div fxLayout="column">
+    <div class="container" fxLayout="row" fxflex="100" fxLayout.sm="column" fxLayout.xs="column"
+        fxLayoutAlign="space-evenly center" fxLayoutGap="40px" fxLayoutGap.xs="30px">
+        <div fxFlex="50" *ngIf="publication">
+            <mat-card>
+                <img mat-card-image src="{{baseURL + publication.product_photo}}">
+                <button mat-button>
+                    <mat-icon>shopping_cart</mat-icon>
+                </button>
+                <button (click)="likePublication()" mat-button [matBadge]="publication.likes_qty"
+                    matBadgeColor="accent">
+                    <mat-icon>thumb_up</mat-icon>
+                </button>
+                <button mat-button (click)="dislikePublication()" [matBadge]="publication.dislikes_qty"
+                    matBadgeColor="accent">
+                    <mat-icon>thumb_down</mat-icon>
+                </button>
+                <span class="flex-spacer">
 
-        </mat-card>
-    </div>
-    <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
-        <div fxFlex="" *ngIf="publication" class="comments all-comments">
-            <h1>Comentarios</h1>
-            <mat-list>
-                <div *ngFor="let comment of comments" class="comment-container">
-                    <mat-list-item class="item">
-                        <img mat-card-avatar src="{{baseURL + comment.client_profile_picture}}">
-                        <h4><strong>{{comment.client_name}} {{comment.client_lastname}}</strong></h4>
-                    </mat-list-item>
-                    <mat-list-item >              
-                        <h5>{{comment.publication_comment_date}}</h5>
-                    </mat-list-item>
-                    <mat-list-item>
-                        <p>{{comment.publication_comment_content}}</p>
-                    </mat-list-item>
-                    <mat-divider></mat-divider>
-                </div>
-            </mat-list>
+                </span>
+                <button class="go-back" mat-button (click)="goBack()">
+                    <mat-icon>
+                        keyboard_backspace</mat-icon>
+                </button>
+
+            </mat-card>
         </div>
-        <div fxFlex="" *ngIf="publication" class="comments">
+        <div fxFlex="50" fxLayout="column" flexLayoutAlign="start start" fxLayoutGap="40px">
+            <mat-card class="vendor-card">
+                <h3>Información del producto</h3>
+                <mat-card-header>
+                    <mat-card-title>
+                        <p><strong>{{publication.product_name | uppercase}}</strong></p>
+                        <h2 class="mat-title">{{publication.product_detail}}</h2>
+                        <h4 *ngIf="publication">Precio: Q.{{publication.product_unit_price}}</h4>
+                        
+                    </mat-card-title>
+
+                </mat-card-header>
+                <button mat-button class="den-button" style="background:#990000; color:white;margin-left:20px;">
+                    <mat-icon>block</mat-icon> Denunciar publicación
+                </button>
+            </mat-card>
+            <mat-card class="vendor-card">
+                <h3>Descripción del vendedor</h3>
+
+                <mat-card-header>
+                    <img mat-card-avatar src="{{baseURL + client['client_profile_picture']}}" width="20" height="50">
+                    <mat-card-title>{{client.client_name}} {{client.client_lastname}}</mat-card-title>
+                </mat-card-header>
+                <br>
+                <button mat-button (click)="openChat()">
+                    <mat-icon>chat</mat-icon> Chatea con el vendedor
+                </button>
+            </mat-card>
+        </div>
+    </div>
+
+    <div fxFlex="100" class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" 
+    fxLayoutGap="30px">
+        <div fxFlex="20" *ngIf="publication" class="comments all-comments" style="overflow-y: scroll; height:280px;">
+            <h1>Comentarios</h1>
+            <div *ngFor="let comment of comments" class="comment-container" >
+                <mat-card class="comment-card">
+                    <mat-card-header>
+                        <img mat-card-avatar src="{{baseURL + comment.client_profile_picture}}">
+                        <mat-card-title>
+                            <h4><strong>{{comment.client_name}} {{comment.client_lastname}}</strong></h4>
+                            <h5>{{comment.publication_comment_date}}</h5>
+                            <p>{{comment.publication_comment_content}}</p>
+                        </mat-card-title>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+        </div>
+        <div fxFlex="50" *ngIf="publication" class="comments">
             <h1>Deja tu comentario <mat-icon>mood</mat-icon>
             </h1>
             <form novalidate [formGroup]="commentForm" #fform="ngForm" (ngSubmit)="onSubmit()">
@@ -62,19 +90,7 @@
             </form>
         </div>
     </div>
-    <div fxFlex="20" fxLayoutAlign="center center">
-        <mat-card class="vendor-card">
-            <h3>Descripción del vendedor</h3>
-            
-            <mat-card-header>
-                <img mat-card-avatar src="{{baseURL + client['client_profile_picture']}}" width="20" height="50">
-                <mat-card-title>{{client.client_name}} {{client.client_lastname}}</mat-card-title>
-            </mat-card-header>
-            <br>
-            <button mat-button (click)="openChat()">
-                <mat-icon>chat</mat-icon> Chat
-            </button>
-        </mat-card>
-    </div>
-
+    
 </div>
+
+

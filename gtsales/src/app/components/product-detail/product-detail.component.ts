@@ -97,6 +97,7 @@ export class ProductDetailComponent implements OnInit {
         this.comments = res['comments'];
       });
     });
+    this.commentForm.reset();
   }
 
   ngOnInit(): void {}
