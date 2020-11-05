@@ -12,6 +12,8 @@ ADD verified varchar2(20);
 ALTER TABLE product 
 MODIFY product_unit_price Number(10,2);
 
+alter table message add message_date timestamp default sysdate;
+
 insert into clientp (client_name, client_lastname, client_username, client_password, client_email, client_birthday,
       client_profile_picutre, client_credits_qty, client_country) 
     SELECT 'Guillermo', 'Joba', 'guilli', '1234', 'joba@hotmail.com', '30 OCT 1998',
@@ -117,6 +119,34 @@ select c.client_name, c.client_lastname, pc.publication_comment_content, pc.publ
 from clientp c, publication_comment pc where pc.client_id = c.client_id and pc.publication_detail_id = 2;
 
 
+-- CHAT ---
+
+insert into chat (client_one, client_two, chat_message) values (101, 121, 'jajajaja');
+
+select * from chat;
+
+select ch.client_one, c1.client_name, ch.client_two, c2.client_name, ch.chat_message from
+chat ch, clientp c1, clientp c2 where c1.client_id = 101 and c2.client_id = 121
+
+select ch.client_one, c1.client_name, ch.client_two, c2.client_name, ch.chat_message from
+chat ch, clientp c1, clientp c2 where ch.client_one = c1.client_id and ch.client_two = c2.client_id;
 
 
 
+insert into chat_room (client_one, client_two) values (101, 121);
+
+select * from chat_room;
+
+insert into message (message_content, client_id, chat_room_id) 
+values('Hola Carlos', 121, 1);
+
+select * from message;
+
+select m.chat_room_id, m.message_content, m.client_id, c.client_name, c.client_lastname,m.message_date   
+    from message m, clientp c where m.chat_room_id = 1 and c.client_id = m.client_id;
+    
+insert into chat_room(client_one, client_two) select 101, 141 from dual
+where not exists (select * from chat_room where (client_one = 101 and client_two = 141) or(client_one = 141 and client_two = 101));
+select * from chat_room;
+
+select * from clientp;

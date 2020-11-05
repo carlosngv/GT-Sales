@@ -26,6 +26,7 @@ import { PublicationComponent } from './components/publication/publication.compo
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ChatComponent } from './components/chat/chat.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { ProductsComponent } from './components/products/products.component';
     ProductDetailComponent,
     NewProductComponent,
     ProductsComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,9 @@
-import { Component, OnInit,ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild,OnDestroy, Inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Params, ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Client } from '../../shared/client';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { Client } from '../../shared/client';
+import { MediaChange, MediaObserver } from '@angular/flex-layout';
+import { Subscription } from 'rxjs';
 
 interface htmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -14,18 +13,19 @@ interface htmlInputEvent extends Event {
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  clientForm: FormGroup;
+export class ProfileComponent implements OnInit, OnDestroy {
   client: Client;
   clientAux: Client;
   file: File;
   photoSelected: string | ArrayBuffer;
+  clientForm: FormGroup;
   @ViewChild('fform') clientFormDirective;
-
-
+  mediaSub: Subscription;
+  deviceXS: boolean;
+  value: number = 40;
   constructor(
     private userService: UserService,
-    private activatedRoute: ActivatedRoute,
+    public mediaObserver: MediaObserver,
     private fb: FormBuilder,
     @Inject('baseURL') public baseURL
   ) { 
@@ -37,7 +37,18 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.mediaSub = this.mediaObserver.media$.subscribe((result:MediaChange) => {
+      console.log(result.mqAlias);
+      this.deviceXS = result.mqAlias === 'xs' ? true : false;
+      if(this.deviceXS) {
+        this.value = 100;
+      }
+        else if (result.mqAlias === 'sm') {
+          this.value = 70;
+      } else {
+        this.value = 40;
+      }
+    });
   }
 
   createForm() {
@@ -65,7 +76,9 @@ export class ProfileComponent implements OnInit {
       console.log(this.file)
     }
   }
-
+  ngOnDestroy(){
+    this.mediaSub.unsubscribe();
+  }
   onSubmit() {
     this.client = {
       client_name: this.clientForm.value.firstname,

@@ -50,8 +50,11 @@ create sequence chat_room_seq START WITH 1 INCREMENT BY 1;
 
 create table chat_room (
     chat_room_id number,
-    chat_room_description varchar2(125),
-    primary key (chat_room_id)
+    client_one number,
+    client_two number,
+    primary key (chat_room_id),
+    foreign key (client_one) references clientp(client_id),
+    foreign key (client_two) references clientp(client_id)
 );
 
 create trigger chat_room_trigger
@@ -61,26 +64,20 @@ begin
   :new.chat_room_id := chat_room_seq.nextval;
 end;
 
+-- Chat 
+create sequence chat_room_seq START WITH 1 INCREMENT BY 1;
 
--- Client chat room
-create sequence cc_room_seq START WITH 1 INCREMENT BY 1;
-
-create table client_chat_room (
-    client_chat_room_id number,
-    client_id number,
-    chat_room number,
-    primary key (client_chat_room_id),
-    foreign key (client_id) references clientp(client_id),
-    foreign key (chat_room) references chat_room(chat_room_id)
+create table chat_room (
+    chat_room_id number,
+    primary key (chat_room_id)
 );
 
-create trigger client_chat_room_trigger
-before insert on client_chat_room
+create trigger chat_trigger
+before insert on chat_room
 for each row
 begin
-  :new.client_chat_room_id := cc_room_seq.nextval;
+  :new.chat_room_id := chat_room_seq.nextval;
 end;
-
 
 -- Chat Messages
 create sequence message_seq START WITH 1 INCREMENT BY 1;
@@ -321,7 +318,7 @@ drop table publication_detail;
 drop table purchase;
 drop table purchase_detail;
 
-
+drop table chat;
 
 
 

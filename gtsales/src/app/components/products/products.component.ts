@@ -20,6 +20,7 @@ export class ProductsComponent implements OnInit {
     console.log('client_id',idClient)
     this.publicationService.getOthersPublications(idClient).subscribe((publications) => {
       this.publications = publications;
+      console.log(this.publications)
     });
   }
 

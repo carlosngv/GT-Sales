@@ -1,6 +1,6 @@
 <div class="container" fxFlex="100" fxLayoutAlign="center center">
-    <div fxFlex="40">
-        <mat-card>
+    <div [fxFlex]="value" >
+        <mat-card class="card">
             <mat-card-header >
                 <mat-card-title fxLayout="row" fxLayoutAlign="center center">
                     <img mat-card-image src="{{baseURL + client['client_profile_picture']}}">

@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Product } from '../../shared/product';
 import { MatDialogRef, MatDialog } from "@angular/material/dialog";
 import { PublicationService } from '../../services/publication.service';
-import { Params, ActivatedRoute } from "@angular/router";
-import { switchMap } from "rxjs/operators";
+import {  ActivatedRoute } from "@angular/router";
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 

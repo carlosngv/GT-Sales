@@ -1,0 +1,23 @@
+<div class="container" fxLayout="column" fxFlex="100%" fxLayoutAlign="">
+    <mat-toolbar>
+        <img mat-card-avatar src="{{baseURL + vendor['client_profile_picture']}}">
+        {{vendor['client_name']}} {{vendor['client_lastname']}}
+        <span class="flex-spacer"></span>
+        <button mat-icon-button mat-dialog-close>&times;</button>
+    </mat-toolbar>
+    <div style="overflow-y: scroll; height:280px;" #messageContainer>
+        <mat-card *ngFor="let message of messages" fxLayout="column" fxLayoutGap="-5px" fxLayoutAlign="start start">
+            <h5>{{message.client_name}} {{message.client_lastname}}:</h5>
+            <p>{{message.message_content}}</p>
+            <h6>{{message.chat_date}}</h6>
+        </mat-card>
+    </div>
+    <div fxFlex>
+        <form (submit)="sendMessage(in.value)" fxLayout="row" fxLayoutAlign="space-around center">
+            <input #in matInput class="messageInput" type="text">
+            <button mat-button>
+                <mat-icon>send</mat-icon>
+            </button>
+        </form>
+    </div>
+</div>

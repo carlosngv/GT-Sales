@@ -126,7 +126,8 @@ publicationRouter.get("/others/:id", async (req, res) => {
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
         p.product_unit_price, p.product_photo, pd.publication_detail_id, c.client_lastname from publication pub, product p, clientp c, publication_detail pd 
-        where pub.product_id = p.product_id and pub.client_id != :id and c.client_id = :id and pd.publication_id = pub.publication_id
+        where pub.product_id = p.product_id and pub.client_id != :id 
+        and c.client_id = pub.client_id and pd.publication_id = pub.publication_id
         
     `;
 

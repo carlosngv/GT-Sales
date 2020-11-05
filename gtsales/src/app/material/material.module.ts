@@ -16,9 +16,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 const MaterialComponents = [
   MatButtonModule,
+  ScrollingModule,
   MatCardModule,
   MatButtonToggleModule,
   MatIconModule,

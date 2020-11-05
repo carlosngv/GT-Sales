@@ -19,11 +19,12 @@ export class HeaderComponent implements OnInit {
   public authService: AuthService,
   public userService: UserService
   ) {
-      this.client = JSON.parse(localStorage['CurrentClient']);
+    
    }
 
   ngOnInit(): void {
-    
+    this.client = JSON.parse(localStorage['CurrentClient']);
+
   }
 
 

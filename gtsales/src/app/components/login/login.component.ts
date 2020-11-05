@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { Client } from "../../shared/client";
 import { Router } from "@angular/router";
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         console.log('CLIENT ID:',this.client["client_id"]);
-        this.router.navigate(["profile", '']);
+        this.router.navigate(["profile"]);
         this.authService.storeUser(this.client);
         console.log(this.client["client_id"]);
       } else {

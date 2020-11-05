@@ -1,12 +1,15 @@
 .toolbar {
     background: #e15f41;
+    height: 80px;
+    width: 100%;
 }
-.logo-container {
+.logo-container2 {
     text-decoration: none;
     color: black;
     padding: 5px;
     margin: 10px;
     margin-bottom: 20px;
+    z-index: 1;
 }
 .logo-container h1{
     margin-top: 15px;
@@ -20,7 +23,7 @@ a {
     color: black;
 }
 
-.panel-class {
-    background-color: blue;
-    color: green;
+
+.menu-items {
+    color: white;
 }

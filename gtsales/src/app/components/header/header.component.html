@@ -1,36 +1,71 @@
 <mat-toolbar class="toolbar">
-    <a class="logo-container" routerLink="/home">
-        <span fxLayout="row" fxLayoutAlign="center center">
-            <img class="logo" src="/assets/images/carrito-de-compras.png" height="40" widht="55">
-            <h1>GTSales</h1>
-        </span>
-    </a>
-    <span class="flex-spacer"></span>
-    <div fxHide.xs>
-        <a mat-button routerLink="/home" routerLinkActive="active">
-            <mat-icon>home</mat-icon>Principal
-        </a>
-        <a mat-button (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
-            <mat-icon>login</mat-icon>Iniciar Sesión
-        </a>
-        <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
-            <mat-icon>book_online</mat-icon>Registrate
-        </a>
-        <a mat-button routerLink="/products" *ngIf="authService.isLogged()">
-            <mat-icon>storefront</mat-icon> Tienda
-         </a>
-        <a mat-button routerLink="/myProducts" *ngIf="authService.isLogged()">
-           <mat-icon>grid_on</mat-icon> Mis Productos
-        </a>
-        <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="authService.isLogged()">
-            <mat-icon>face</mat-icon> Perfil
-        </a>
-        <a mat-button  routerLinkActive="active" *ngIf="authService.isLogged()">
-            <mat-icon>shopping_cart</mat-icon> Carrito
-        </a>
-        <a mat-button  (click)="logout()"routerLinkActive="active" *ngIf="authService.isLogged()">
-            Cerrar Sesión
+    <div fxFlex="100" fxLayout="">
+    <div class="logo-container">
+        <a class="logo-container2" routerLink="/home">
+            <span fxLayout="row" fxLayoutAlign="center center">
+                <img class="logo" src="/assets/images/carrito-de-compras.png" height="40" widht="55">
+                <h1>GTSales</h1>
+            </span>
         </a>
     </div>
-
+    <span class="flex-spacer"></span>
+    <button fxHide.lg fxHide.md mat-button [matMenuTriggerFor]="menu" style="color:black"><mat-icon>reorder</mat-icon></button>
+    <mat-menu #menu="matMenu">
+        <div class="menu-items">
+            <a mat-menu-item routerLink="/home" routerLinkActive="active">
+                <mat-icon>home</mat-icon>Principal
+            </a>
+            <a mat-menu-item (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+                <mat-icon>login</mat-icon>Iniciar Sesión
+            </a>
+            <a mat-menu-item (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+                <mat-icon>book_online</mat-icon>Registrate
+            </a>
+            <a mat-menu-item routerLink="/products" *ngIf="authService.isLogged()">
+                <mat-icon>storefront</mat-icon> Tienda
+            </a>
+            <a mat-menu-item routerLink="/myProducts" *ngIf="authService.isLogged()">
+                <mat-icon>grid_on</mat-icon> Mis Productos
+            </a>
+            <a mat-menu-item routerLink="/profile" routerLinkActive="active" *ngIf="authService.isLogged()">
+                <mat-icon>face</mat-icon> Perfil
+            </a>
+            <a mat-menu-item routerLinkActive="active" *ngIf="authService.isLogged()">
+                <mat-icon>shopping_cart</mat-icon> Carrito
+            </a>
+            <a mat-menu-item (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged()">
+                Cerrar Sesión
+            </a>
+        </div>
+        
+    </mat-menu>
+    <div class="menu-items" fxLayoutAlign="center center">
+        <div fxHide.xs>
+            <a mat-button routerLink="/home" routerLinkActive="active">
+                <mat-icon>home</mat-icon>Principal
+            </a>
+            <a mat-button (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+                <mat-icon>login</mat-icon>Iniciar Sesión
+            </a>
+            <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+                <mat-icon>book_online</mat-icon>Registrate
+            </a>
+            <a mat-button routerLink="/products" *ngIf="authService.isLogged()">
+                <mat-icon>storefront</mat-icon> Tienda
+            </a>
+            <a mat-button routerLink="/myProducts" *ngIf="authService.isLogged()">
+                <mat-icon>grid_on</mat-icon> Mis Productos
+            </a>
+            <a mat-button routerLink="/profile" routerLinkActive="active" *ngIf="authService.isLogged()">
+                <mat-icon>face</mat-icon> Perfil
+            </a>
+            <a mat-button routerLinkActive="active" *ngIf="authService.isLogged()">
+                <mat-icon>shopping_cart</mat-icon> Carrito
+            </a>
+            <a mat-button (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged()">
+                Cerrar Sesión
+            </a>
+        </div>
+    </div>
+</div>
 </mat-toolbar>

@@ -2,7 +2,8 @@
     float: right;
 }
 .comments mat-list-item{
-    color: black
+    color: black;
+
 }
 
 .comments button{
@@ -32,4 +33,29 @@ mat-divider {
 .comment-container {
     max-width: 250px;
     margin-bottom: 10px;
+}
+
+.chat-button {
+    background-color: #ccc;
+}
+
+.vendor-card {
+    color:black;
+    background-color: white;
+}
+
+mat-card-avatar {
+    margin-bottom: 10px;
+}
+
+h4{
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+mat-list-item p {
+    margin-left: 40px;
+}
+mat-list-item h5 {
+    margin-left: 40px;
 }

@@ -1,5 +1,5 @@
 .image-content {
-    border-radius: 50%;
+    border-radius: 0%;
 }
 
 .images-container {
@@ -7,8 +7,9 @@
 }
 
 mat-card {
-    background-color: #596275;
+    background-color: transparent;
     border-radius: 10px;
+    color: black
 }
 
 mat-card:hover {
@@ -39,3 +40,32 @@ mat-expansion-panel {
 .jumbotron img {
     border-radius: 20px;
 }
+
+.wrapper {
+    background: url("/assets/images/home5.jpg") no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+}
+
+.text-block {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 60px;
+  }
+
+  .center-item {
+    border-right: 1px solid #38546d;
+    width: 1px;
+    height: 50px;
+    position: absolute;
+    right: 250px;
+    top: 10px;
+  }
+
+  mat-grid-item {
+      margin: 10px;
+  }
