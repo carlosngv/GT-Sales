@@ -4,6 +4,8 @@
 
 .images-container {
     margin: 40px;
+    border-radius: 10%;
+
 }
 
 mat-card {
@@ -51,10 +53,10 @@ mat-expansion-panel {
 .text-block {
     position: absolute;
     top: 40%;
-    left: 40%;
+    left: 44%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 60px;
+    font-size: 63px;
   }
 
   .center-item {

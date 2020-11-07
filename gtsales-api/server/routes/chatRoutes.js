@@ -22,7 +22,7 @@ chatRouter.get("/messages/:id", async (req, res) => {
       client_id: message[2],
       client_name: message[3],
       client_lastname: message[4],
-      chat_date: date.format("DD-MM-YYYY"),
+      chat_date: date.format("DD-MM-YYYY HH:mm"),
     };
     messagesArray.push(messageSchema);
   });

@@ -1,0 +1,26 @@
+textarea{
+    resize: none;
+    margin: auto;
+}
+
+mat-toolbar {
+    background-color: black;
+    color: white;
+    padding: 3px;
+    width: 95%;
+}
+
+mat-toolbar button {
+    float: right;
+}
+
+form button {
+    width: 97%;
+    background-color: #457b9d;
+
+}
+
+.text {
+    margin-left: 30px;
+    margin-top: 10px;
+}

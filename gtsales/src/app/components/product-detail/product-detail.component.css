@@ -43,7 +43,7 @@ mat-divider {
     margin-bottom: 20px;
 }
 .comment-container {
-    max-width: 250px;
+    max-width: 400px;
     margin-bottom: 10px;
 }
 
@@ -56,13 +56,13 @@ mat-divider {
 .vendor-card {
     color:black;
     background-color: white;
-    max-height: 200px;
+    max-height: 230px;
 }
 
 .comment-card {
     color:black;
     background-color: white;
-    max-height: 160px;
+    max-height: 350px;
 }
 
 mat-card-avatar {
@@ -79,4 +79,22 @@ mat-list-item p {
 }
 mat-list-item h5 {
     margin-left: 40px;
+}
+
+textarea {
+    columns: 10;
+}
+
+.comment-title {
+    margin-top: 20px;
+    margin-left: 50px;
+}
+
+hr {
+    border-top: 1px solid black;
+    width: 100%;
+    margin-left: 0;
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -10px rgba(0, 0, 0, 0.5);
 }

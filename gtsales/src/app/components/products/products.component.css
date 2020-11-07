@@ -1,0 +1,13 @@
+.img-container mat-grid-tile:hover {
+    transition: all 0.1s;
+    box-shadow: 1px 3px 10px 3px black;
+}
+
+hr {
+    border-top: 1px solid black;
+    width: 100%;
+    margin-left: 0;
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}

@@ -7,6 +7,8 @@ import { ProcessHttpMsgService } from '../services/process-http-msg.service.serv
 import { Publication } from '../shared/publication';
 import { Comment } from '../shared/comment';
 import { Product } from '../shared/product'; 
+import { Complaint } from '../shared/complaint'; 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +44,11 @@ export class PublicationService {
 
   addComment(comment): Observable<any> {
     return this.http.post(baseURL + 'publications/publication/addComment', comment)
+    .pipe(catchError(this.processHttpMsgService.handleError));
+  }
+
+  newComplaint(newComplaint: Complaint): Observable<Complaint> {
+    return this.http.post<Complaint>(baseURL + 'publications/newComplaint', newComplaint)
     .pipe(catchError(this.processHttpMsgService.handleError));
   }
 

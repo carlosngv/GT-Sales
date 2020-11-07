@@ -12,6 +12,12 @@ ADD verified varchar2(20);
 ALTER TABLE product 
 MODIFY product_unit_price Number(10,2);
 
+alter table complaint
+modify complaint_date timestamp default sysdate;
+
+alter table complaint
+add publication_id number;
+
 alter table message add message_date timestamp default sysdate;
 
 insert into clientp (client_name, client_lastname, client_username, client_password, client_email, client_birthday,
@@ -150,3 +156,27 @@ where not exists (select * from chat_room where (client_one = 101 and client_two
 select * from chat_room;
 
 select * from clientp;
+
+
+-- Complaints
+
+select * from publication_detail;
+
+alter table publication_detail add blocked varchar(20) default 'false';
+
+
+insert into complaint (complaint_description, client_id, publication_id) values('MUY MAL PRODUCTO, NO RECOMENDADO!!!', 121, 41);
+
+select * from complaint;
+
+select co.complaint_id, c.client_id, c.client_name, c.client_lastname, 
+co.complaint_description, pub.product_id, p.product_name
+from complaint co, publication pub, clientp c, product p 
+where co.client_id = c.client_id 
+and co.publication_id = pub.publication_id 
+and p.product_id = pub.product_id;
+
+select * from product;
+
+select * from clientp;
+

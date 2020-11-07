@@ -1,16 +1,23 @@
-mat-card {
-    background-color: white;
-    color: black;
-    padding: 0;
-}
 * {
     padding: 5px;
     margin: 5px;
 }
+mat-card {
+    background-color: white;
+    color: black;
+    padding: 0;
+    width: 100%;
+}
+
 img {
    margin-right: 5px;
 }
 
+h5 {
+    margin-top: 5px;
+    width: 100%;
+    background-color: #cccc;
+}
 
 input {
     margin: 0;

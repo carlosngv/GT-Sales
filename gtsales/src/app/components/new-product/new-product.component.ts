@@ -34,7 +34,6 @@ export class NewProductComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.data)
   }
   
   createForm() {
@@ -67,10 +66,13 @@ export class NewProductComponent implements OnInit {
       product_category: this.productForm.value.product_category,
       image: this.file
     }
-    this.publicationService.newProduct(this.product).subscribe(res => {
+    console.log(this.product);
+
+     this.publicationService.newProduct(this.product).subscribe(res => {
       console.log(res);
-    })
+    }) 
     this.productForm.reset();
+    this.dialogRef.close();
   }
 
 }

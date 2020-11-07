@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
             height: "220px",
           });
           return;
-        console.log("no ok");
       }
     });
   }

@@ -3,14 +3,15 @@ import { PublicationService } from "../../services/publication.service";
 import { ChatService } from "../../services/chat.service";
 import { UserService } from "../../services/user.service";
 import { Params, ActivatedRoute, Router } from "@angular/router";
-import { Location } from '@angular/common'
+import { Location } from "@angular/common";
 import { switchMap } from "rxjs/operators";
 import { Publication } from "../../shared/publication";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { Comment } from "../../shared/comment";
-import { Client } from '../../shared/client';
-import { MatDialog } from '@angular/material/dialog';
-import { ChatComponent } from '../chat/chat.component';
+import { Client } from "../../shared/client";
+import { MatDialog } from "@angular/material/dialog";
+import { ChatComponent } from "../chat/chat.component";
+import { ComplaintFormComponent } from "../complaint-form/complaint-form.component";
 @Component({
   selector: "app-product-detail",
   templateUrl: "./product-detail.component.html",
@@ -22,7 +23,7 @@ export class ProductDetailComponent implements OnInit {
   comments: Comment[];
   client_id: number;
   params: number;
-  params2: number;
+  publication_detail_id: number;
   client: Client;
 
   newComment = {
@@ -44,18 +45,18 @@ export class ProductDetailComponent implements OnInit {
     @Inject("baseURL") public baseURL
   ) {
     this.params = this.activatedRoute.snapshot.params.id;
-    this.params2 = this.activatedRoute.snapshot.params.pdid;
+    this.publication_detail_id = this.activatedRoute.snapshot.params.pdid;
 
     this.publicationService.getPublication(this.params).then((res) => {
       this.publication = res;
-      this.userService.getUser(this.publication['client_id']).subscribe((res) => {
-        this.client = res;
-      }
-      );
+      this.userService
+        .getUser(this.publication["client_id"])
+        .subscribe((res) => {
+          this.client = res;
+        });
     });
-    this.publicationService.getComments(this.params2).then((res) => {
-      this.comments = res['comments'];
-
+    this.publicationService.getComments(this.publication_detail_id).then((res) => {
+      this.comments = res["comments"];
     });
 
     this.createForm();
@@ -70,19 +71,30 @@ export class ProductDetailComponent implements OnInit {
   }
 
   openChat() {
-    console.log(this.client_id, this.client['client_id'])
-    this.chatService.newRoom({client_one: this.client_id, client_two: this.client['client_id']})
-    .subscribe((res) => console.log(res)); 
-
+    console.log(this.client_id, this.client["client_id"]);
+    this.chatService
+      .newRoom({
+        client_one: this.client_id,
+        client_two: this.client["client_id"],
+      })
+      .subscribe((res) => console.log(res));
 
     this.dialog.open(ChatComponent, {
       width: "420px",
-      height: "500px",
+      height: "480px",
       data: {
         client_id: this.client_id,
-        vendor_id: this.publication['client_id'],
-        client_two: this.client['client_id']
-      }
+        vendor_id: this.publication["client_id"],
+        client_two: this.client["client_id"],
+      },
+    });
+  }
+
+  newComplaint() {
+    this.dialog.open(ComplaintFormComponent, {
+      data: this.params,
+      width: "300px",
+      height: "380px"
     })
   }
 
@@ -93,8 +105,8 @@ export class ProductDetailComponent implements OnInit {
       publication_detail_id: Number(this.publication["publication_detail_id"]),
     };
     this.publicationService.addComment(this.newComment).subscribe((res) => {
-      this.publicationService.getComments(this.params2).then((res) => {
-        this.comments = res['comments'];
+      this.publicationService.getComments(this.publication_detail_id).then((res) => {
+        this.comments = res["comments"];
       });
     });
     this.commentForm.reset();

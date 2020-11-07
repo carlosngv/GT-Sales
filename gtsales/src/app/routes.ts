@@ -4,6 +4,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MyProductsComponent } from './components/my-products/my-products.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductsComponent } from './components/products/products.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
@@ -12,5 +13,6 @@ export const routes: Routes = [
     { path: 'myProducts', component:MyProductsComponent ,canActivate:[AuthGuard]},
     { path: 'productDetail/:id/:pdid', component:ProductDetailComponent ,canActivate:[AuthGuard]},
     { path: 'products', component:ProductsComponent ,canActivate:[AuthGuard]},
+    { path: 'shoppingCart', component:ShoppingCartComponent ,canActivate:[AuthGuard]},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

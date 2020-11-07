@@ -27,6 +27,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { NewProductComponent } from './components/new-product/new-product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { ComplaintFormComponent } from './components/complaint-form/complaint-form.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,8 @@ import { ChatComponent } from './components/chat/chat.component';
     NewProductComponent,
     ProductsComponent,
     ChatComponent,
+    ComplaintFormComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     BrowserModule,

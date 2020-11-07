@@ -1,0 +1,18 @@
+<div fxFlex="100%"  fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+    <mat-toolbar fxLayoutAlign="space-between" fxLayoutGap="10px">
+        <p class="text">Denuncia
+    </p>
+    <button mat-button mat-dialog-close>&times;</button>
+    </mat-toolbar>
+    <form novalidate [formGroup]="complaintForm" #fform="ngForm" (ngSubmit)="onSubmit()" >
+        <mat-form-field appearance="outline" color="accent">
+            <mat-label>
+                Descripción de denuncia
+            </mat-label>
+            <textarea type="text" matInput rows="10" formControlName="complaint_description" placeholder="Cuentenos su experiencia con el producto...">
+            </textarea>
+        </mat-form-field>
+        <br>
+        <button mat-button type="submit" [disabled]="complaintForm.invalid">Enviar</button>
+    </form>
+</div>

@@ -30,9 +30,9 @@ export class MyProductsComponent implements OnInit {
 
   newPublication() {
     const dialogRef = this.dialog.open(NewProductComponent, {
-      data: this.id,
+      data: this.client['client_id'],
       width: '500px',
-      height: '420px'
+      height: '450px'
     });
     dialogRef.afterClosed().subscribe(res => {
       this.activatedRoute.params

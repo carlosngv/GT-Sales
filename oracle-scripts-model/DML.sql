@@ -214,6 +214,7 @@ create table publication_detail (
     publication_id number,
     likes_qty number,
     dislikes_qty number,
+    blocked varchar(20) default 'false',
     primary key(publication_detail_id),
     foreign key (publication_id) references publication(publication_id)
 );
@@ -233,7 +234,7 @@ create sequence publication_comment_seq START WITH 1 INCREMENT BY 1;
 create table publication_comment (
     publication_comment_id number,
     publication_comment_content varchar2(255),
-    publication_comment_date date,
+    publication_comment_date timestamp default sysdate,
     client_id number,
     publication_detail_id number,
     primary key(publication_comment_id),
@@ -258,10 +259,9 @@ create sequence complaint_seq START WITH 1 INCREMENT BY 1;
 create table complaint (
     complaint_id number,
     complaint_description varchar2(255),
-    complaint_date date,
-    complaint_blocked varchar2(10),
+    complaint_date timestamp default sysdate,
     client_id number,
-    publication_detail_id number,
+    publication_id number,
     primary key(complaint_id),
     foreign key (client_id) references clientp(client_id),
     foreign key (publication_detail_id) references publication_detail(publication_detail_id)

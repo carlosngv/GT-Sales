@@ -280,7 +280,7 @@ publicationRouter.get("/publication/:id/comments", async (req, res) => {
       client_name: comment[1],
       client_lastname: comment[2],
       publication_comment_content: comment[3],
-      publication_comment_date: date.format("DD-MM-YYYY"),
+      publication_comment_date: date.format("DD-MM-YYYY HH:mm"),
       publication_detail_id: comment[5],
       client_profile_picture: comment[6]
     }
@@ -290,7 +290,77 @@ publicationRouter.get("/publication/:id/comments", async (req, res) => {
   res.setHeader("Content-Type", "application/json");
   res.json({
     comments: commentArray
-  })
+  });
 
 });
+
+publicationRouter.post("/newComplaint", async (req, res) => {
+  const {
+    complaint_description,
+    client_id,
+    publication_id    
+  
+  } = req.body;
+  console.log(req.body)
+  let query = `
+    insert into complaint (complaint_description, client_id, publication_id) values
+    (:complaint_description, :client_id, :publication_id)
+  `
+
+  await db.Open(query, [complaint_description, client_id, publication_id ], true).then((res) => {
+    res.statusCode = 200;
+    console.log(res);
+  }, err => {
+    res.statusCode = 400;
+    console.log(err);
+  })
+
+  res.setHeader('Content-Type', 'application/json');
+  res.json({
+    message: "Complaint successfully posted!"
+  });
+
+});
+
+publicationRouter.get('/complaints/allComplaints', async (req, res) => {
+  let query = `
+  select co.complaint_id, co.complaint_date, c.client_id, c.client_name, c.client_lastname, 
+  co.complaint_description, pub.product_id, p.product_name
+  from complaint co, publication pub, clientp c, product p 
+  where co.client_id = c.client_id 
+  and co.publication_id = pub.publication_id 
+  and p.product_id = pub.product_id
+  `
+  console.log('hola')
+  let complaints = await db.Open(query, [], false);
+  let complaintArray = [];
+  complaints.rows.map((complaint) => {
+    let date = moment(complaint[1])
+    let complaintSchema = {
+      complaint_id: complaint[0],
+      complaint_date: date.format('DD-MM-YYYY HH:mm'),
+      client_id: complaint[2],
+      client_name: complaint[3],
+      client_lastname: complaint[4],
+      complaint_description: complaint[5],
+      product_id: complaint[6],
+      product_name: complaint[7]
+    }
+    complaintArray.push(complaintSchema);
+  });
+
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.json({
+    complaints: complaintArray
+  });
+
+});
+
+
+
+
+
 module.exports = publicationRouter;
+
+
