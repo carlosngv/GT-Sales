@@ -1,1 +1,32 @@
-<p>shopping-cart works!</p>
+
+<div class="container" fxFlex="100%" fxLayout="column" fxLayoutGap="30px">
+   
+
+    <div class="title" fxHide.xs fxHide.sm> 
+        Carrito de compras
+    </div>
+    <div style="font-size: 34px;" fxHide fxShow.xs fxShow.sm> 
+        Carrito de compras
+    </div>
+    <table  class="table">
+        <thead>
+          <tr class="table-secondary">
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio Unitario</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let purchase of purchases">
+            <th scope="row">{{purchase.product_name}}</th>
+            <td>{{purchase.product_qty}}</td>
+            <td>{{purchase.product_unit_price}}</td>
+            <td>{{purchase.subtotal}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div  style="font-size:20px;">Total: </div>
+      <button mat-button>Relizar compra</button>
+    </div>

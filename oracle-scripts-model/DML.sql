@@ -149,6 +149,7 @@ create table purchase (
     purchase_id number,
     client_id number,
     purchase_total decimal(10,2),
+    purchased varchar(20) default 'false',
     primary key(purchase_id),
     foreign key (client_id) references clientp(client_id)
 );

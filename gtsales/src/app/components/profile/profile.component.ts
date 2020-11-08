@@ -29,14 +29,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     @Inject('baseURL') public baseURL
   ) { 
+    
+  }
+
+  ngOnInit(): void {
     this.clientAux = JSON.parse(localStorage['CurrentClient']);
     this.userService.getUser(this.clientAux['client_id']).subscribe((user) => {
       this.client = user;
       this.createForm();
     });
-  }
-
-  ngOnInit(): void {
     this.mediaSub = this.mediaObserver.media$.subscribe((result:MediaChange) => {
       console.log(result.mqAlias);
       this.deviceXS = result.mqAlias === 'xs' ? true : false;

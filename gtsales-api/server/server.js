@@ -3,15 +3,15 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const app = express();
-const router = require('express').Router();
+
 
 // Routes
-const mailRouter = require('./mail/mail');
 const clientRouter = require('./routes/clientRoutes');
 const countryRoute = require('./routes/countryRoutes');
 const productRouter = require('./routes/productRoutes');
 const publicationRouter = require('./routes/publicationRoutes');
 const chatRouter = require('./routes/chatRoutes');
+const shoppingCartRouter = require('./routes/shoppingCartRoutes');
 
 // Socket
 const serverHTTP = require('http').Server(app);
@@ -62,6 +62,8 @@ app.use('/countries', countryRoute);
 app.use('/products', productRouter);
 app.use('/publications', publicationRouter);
 app.use('/chat', chatRouter);
+app.use('/cart', shoppingCartRouter);
+
 
 app.use('/uploads', express.static(path.resolve('uploads'))); // Important to locate images
 

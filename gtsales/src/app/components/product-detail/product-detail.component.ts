@@ -44,24 +44,7 @@ export class ProductDetailComponent implements OnInit {
     private chatService: ChatService,
     @Inject("baseURL") public baseURL
   ) {
-    this.params = this.activatedRoute.snapshot.params.id;
-    this.publication_detail_id = this.activatedRoute.snapshot.params.pdid;
-
-    this.publicationService.getPublication(this.params).then((res) => {
-      this.publication = res;
-      this.userService
-        .getUser(this.publication["client_id"])
-        .subscribe((res) => {
-          this.client = res;
-        });
-    });
-    this.publicationService.getComments(this.publication_detail_id).then((res) => {
-      this.comments = res["comments"];
-    });
-
-    this.createForm();
-    let storedUser = JSON.parse(localStorage.getItem("CurrentClient"));
-    this.client_id = storedUser["client_id"];
+    
   }
 
   createForm() {
@@ -112,7 +95,26 @@ export class ProductDetailComponent implements OnInit {
     this.commentForm.reset();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.params = this.activatedRoute.snapshot.params.id;
+    this.publication_detail_id = this.activatedRoute.snapshot.params.pdid;
+
+    this.publicationService.getPublication(this.params).then((res) => {
+      this.publication = res;
+      this.userService
+        .getUser(this.publication["client_id"])
+        .subscribe((res) => {
+          this.client = res;
+        });
+    });
+    this.publicationService.getComments(this.publication_detail_id).then((res) => {
+      this.comments = res["comments"];
+    });
+
+    this.createForm();
+    let storedUser = JSON.parse(localStorage.getItem("CurrentClient"));
+    this.client_id = storedUser["client_id"];
+  }
 
   goBack() {
     this.location.back();

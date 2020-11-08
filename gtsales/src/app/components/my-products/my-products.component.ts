@@ -21,11 +21,7 @@ export class MyProductsComponent implements OnInit {
     private dialog: MatDialog,
     @Inject("baseURL") public baseURL
   ) {
-    this.client = JSON.parse(localStorage['CurrentClient']);
-    console.log('ID',this.client['client_id'])
-    this.publicationService.getPublications(this.client['client_id']).subscribe((publications) => {
-      this.publications = publications;
-    });
+    
   }
 
   newPublication() {
@@ -48,5 +44,11 @@ export class MyProductsComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.client = JSON.parse(localStorage['CurrentClient']);
+    console.log('ID',this.client['client_id'])
+    this.publicationService.getPublications(this.client['client_id']).subscribe((publications) => {
+      this.publications = publications;
+    });
+  }
 }

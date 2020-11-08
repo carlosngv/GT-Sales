@@ -180,3 +180,49 @@ select * from product;
 
 select * from clientp;
 
+
+
+--- Shopping cart
+
+
+insert into purchase (client_id) values (141);
+
+select * from purchase;
+
+select p.product_unit_price, pd.product_qty from product p, purchase_detail pd where pd.product_id = p.product_id;
+
+select 21, 21, 3, product_unit_price * 3 as subtotal from product where product_id = 21;
+
+insert into purchase_detail (product_id, purchase_id, product_qty, subtotal)  
+(select 21, 21, 3, product_unit_price * '3' as subtotal from product where product_id = 21);
+
+--- Purchases 
+select c.client_name, c.client_lastname, p.product_name, pd.purchase_id, pd.product_qty, pd.subtotal
+from purchase_detail pd, product p, clientp c, purchase pu 
+where pd.purchase_id = pu.purchase_id
+and pd.product_id = p.product_id 
+and pu.client_id = c.client_id;
+
+
+--- TOTAL
+select SUM(pd.subtotal) as Total from purchase_detail pd, purchase p 
+where p.purchase_id = 21
+group by p.purchase_id
+
+--- credits quantity - total of purchase
+update clientp set
+client_credits_qty = client_credits_qty - (select SUM(pd.subtotal) as Total from purchase_detail pd, purchase p 
+where p.purchase_id = pd.purchase_id
+group by p.purchase_id) where client_id = 141;
+
+select * from clientp;
+
+select SUM(pd.subtotal) as Total from purchase_detail pd, purchase p 
+where pd.purchase_id = p.purchase_id 
+group by p.purchase_id;
+
+
+select * from purchase_detail;
+
+--- delete purchases from order when paid...
+delete from purchase_detail where purchase_id= 21;

@@ -1,23 +1,23 @@
-<div class="container" fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start start">
-    <h1 class="mat-display-1">Productos Disponibles</h1>
-    <hr>
-</div>
-<div class="container" fxLayout="column">
-
-    <div fxFlex *ngIf="publications" class="img-container">
-        <mat-grid-list cols="2" rowHeight="200px" gutterSize="10px">
-            <mat-list fxFlex>
-                <mat-grid-tile *ngFor="let publication of publications"
-                    [routerLink]="['/productDetail', publication.publication_id, publication.publication_detail_id]"
-                    appHighlight>
-                    <img height="340px" src="{{baseURL + publication.product_photo}}" alt={{publication.product_name}}>
-                    <mat-grid-tile-footer fxLayout="row" fxLayoutAlign="space-around center">
-                        <h1>{{publication.product_name | uppercase}}</h1>
-                        <h1>Vendedor: {{publication.client_name}} {{publication.client_lastname}}</h1>
-                        <h1>Precio: {{publication.product_unit_price}}</h1>
-                    </mat-grid-tile-footer>
-                </mat-grid-tile>
-            </mat-list>
-        </mat-grid-list>
+    <div class="" fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start start">
+        <h1 class="mat-display-1">Productos Disponibles</h1>
+        <hr>
     </div>
-</div>
+    <div class=""  fxLayout="column">
+    
+        <div fxFlex *ngIf="publications" class="img-container">
+            <mat-grid-list cols="2" rowHeight="200px" gutterSize="10px">
+                <mat-list fxFlex>
+                    <mat-grid-tile *ngFor="let publication of publications"
+                        [routerLink]="['/productDetail', publication.publication_id, publication.publication_detail_id]"
+                        appHighlight>
+                        <img height="340px" src="{{baseURL + publication.product_photo}}" alt={{publication.product_name}}>
+                        <mat-grid-tile-footer fxLayout="row" fxLayoutAlign="space-around center">
+                            <h1>{{publication.product_name | uppercase}}</h1>
+                            <h1>Vendedor: {{publication.client_name}} {{publication.client_lastname}}</h1>
+                            <h1>Precio: {{publication.product_unit_price}}</h1>
+                        </mat-grid-tile-footer>
+                    </mat-grid-tile>
+                </mat-list>
+            </mat-grid-list>
+        </div>
+    </div>
