@@ -1,0 +1,17 @@
+<mat-toolbar>
+    <h1 mat-dialog-title>Ingrese la cantidad</h1>
+</mat-toolbar>
+<br>
+<div mat-dialog-content style="margin-bottom:20px;">
+    <form [formGroup]="qtyForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" fxLayoutAlign="center center">
+            <mat-label>Cantidad</mat-label>
+            <input formControlName="product_qty" type="number" matInput>
+        </mat-form-field>
+        <button mat-button [disabled]="qtyForm.invalid" type="submit">Agregar al carrito</button>
+        <button mat-button class="close" (click)="onNoClick()">Cerrar</button>
+    </form > 
+</div>
+<div mat-dialog-actions>
+    <span class="flex-spacer"></span>
+</div>

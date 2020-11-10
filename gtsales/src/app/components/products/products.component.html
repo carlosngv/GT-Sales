@@ -1,19 +1,25 @@
-    <div class="" fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start start">
+    <div class="products-container" fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start start">
         <h1 class="mat-display-1">Productos Disponibles</h1>
         <hr>
+        <div fxFlex="100%" fxLayout="row" fxLayoutGap="20px">
+            <button mat-button (click)="orderDesc()">Ordenar Ascendente</button>
+            <button mat-button (click)="orderAsc()">Ordenar Decendente</button>
+        </div>
+       
+
     </div>
-    <div class=""  fxLayout="column">
+    <div class="products-container"  fxLayout="column">
     
         <div fxFlex *ngIf="publications" class="img-container">
             <mat-grid-list cols="2" rowHeight="200px" gutterSize="10px">
                 <mat-list fxFlex>
-                    <mat-grid-tile *ngFor="let publication of publications"
+                    <mat-grid-tile *ngFor="let publication of publications" 
                         [routerLink]="['/productDetail', publication.publication_id, publication.publication_detail_id]"
                         appHighlight>
                         <img height="340px" src="{{baseURL + publication.product_photo}}" alt={{publication.product_name}}>
                         <mat-grid-tile-footer fxLayout="row" fxLayoutAlign="space-around center">
                             <h1>{{publication.product_name | uppercase}}</h1>
-                            <h1>Vendedor: {{publication.client_name}} {{publication.client_lastname}}</h1>
+                            <h1 fxHide.xs>Vendedor: {{publication.client_name}} {{publication.client_lastname}}</h1>
                             <h1>Precio: {{publication.product_unit_price}}</h1>
                         </mat-grid-tile-footer>
                     </mat-grid-tile>

@@ -1,0 +1,22 @@
+<div class="container-list" fxFlex="100%" fxLayout="column">
+    <h1>Top clientes con más creditos disponibles</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Cantidad de creditos</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{item.client_name}}  {{item.client_lastname}}</td>
+            <td>{{item.client_email}}</td>
+            <td>{{item.client_birthday}}</td>
+            <td>{{item.client_credits_qty}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

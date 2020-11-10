@@ -11,4 +11,5 @@ export class Publication {
     dislikes:number;
     publication_detail_id: number;
     client_lastname?: string;
+    blocked: string;
 }

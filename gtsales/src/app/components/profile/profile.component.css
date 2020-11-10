@@ -1,6 +1,10 @@
 mat-card-content {
     padding-top: 15px;
+    margin: auto;
     background-color: #596275;
+}
+mat-card {
+    margin:auto;
 }
  button {
     width: 100%;
@@ -9,13 +13,11 @@ mat-card-content {
 button {
     background-color: #457b9d;
     color: black;
-    width: 100%;    
+    width: 70%;    
     margin-bottom: 20px;
 }
 
-mat-form-field {
-    margin-right: 10px;
-}
+
 
 mat-card-header img {
     border-radius: 100%;
@@ -43,7 +45,7 @@ mat-label {
     background-color: #DDD;
     border: 1px solid #ccc;
     display: inline-block;
-    padding: 6px 90px;
+    padding: 6px 40px;
     cursor: pointer;
     border-radius: 5px;
 }

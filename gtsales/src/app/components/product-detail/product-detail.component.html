@@ -1,10 +1,10 @@
-<div fxLayout="column">
-    <div class="container" fxLayout="row" fxflex="100" fxLayout.sm="column" fxLayout.xs="column"
-        fxLayoutAlign="space-evenly center" fxLayoutGap="40px" fxLayoutGap.xs="30px">
-        <div fxFlex="50" *ngIf="publication">
+<div fxLayout="column" *ngIf='!blocked'>
+    <div class="container" fxLayout="row" fxflex="100%" fxLayout.sm="column" fxLayout.xs="column"
+        fxLayoutAlign="space-evenly center" fxLayoutGap="100px" fxLayoutGap.xs="30px">
+        <div fxFlex="50%" *ngIf="publication" >
             <mat-card>
                 <img mat-card-image src="{{baseURL + publication.product_photo}}">
-                <button mat-button>
+                <button mat-button (click)="newPurchase()">
                     <mat-icon>shopping_cart</mat-icon>
                 </button>
                 <button (click)="likePublication()" mat-button [matBadge]="publication.likes_qty"
@@ -25,7 +25,7 @@
 
             </mat-card>
         </div>
-        <div fxFlex="50" fxLayout="column" flexLayoutAlign="start start" fxLayoutGap="40px">
+        <div fxFlex="50%" fxLayout="column" flexLayoutAlign="start start" fxLayoutGap="40px">
             <mat-card class="vendor-card">
                 <h3>Información del producto</h3>
                 <mat-card-header>
@@ -88,5 +88,12 @@
             </form>
         </div>
     </div>
+
+</div>
+
+<div *ngIf="blocked" class="blocked">
+
+    <h1>Lo sentimos, esta publicación se encuentra bloqueada :(</h1>
+    <h2>Esta publicación no cumple con las normas establecidas en nuestra página...</h2>
 
 </div>

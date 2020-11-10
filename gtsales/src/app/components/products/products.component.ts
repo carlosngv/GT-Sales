@@ -17,10 +17,21 @@ export class ProductsComponent implements OnInit {
     @Inject("baseURL") public baseURL
   ) { 
     let idClient = JSON.parse(localStorage['CurrentClient'])['client_id'];
-    console.log('client_id',idClient)
     this.publicationService.getOthersPublications(idClient).subscribe((publications) => {
       this.publications = publications;
-      console.log(this.publications)
+    });
+  }
+
+  orderDesc() {
+    this.publications = this.publications.sort((n1, n2) => {
+      return n1.product_unit_price - n2.product_unit_price
+    });
+
+  }
+
+  orderAsc() {
+    this.publications = this.publications.sort((n1, n2) => {
+      return n2.product_unit_price - n1.product_unit_price
     });
   }
 

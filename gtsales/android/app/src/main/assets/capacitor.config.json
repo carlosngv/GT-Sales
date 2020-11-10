@@ -1,0 +1,13 @@
+{
+  "appId": "com.gtsales.www.app",
+  "appName": "gtsales",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/gtsales",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

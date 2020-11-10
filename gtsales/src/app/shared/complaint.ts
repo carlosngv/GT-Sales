@@ -5,5 +5,5 @@ export class Complaint {
     client_name?: String;
     client_lastname?: String;
     publication_id: String;
-    product_name?:String
+    product_name?:String;
 }

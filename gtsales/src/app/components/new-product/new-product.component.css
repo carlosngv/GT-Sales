@@ -6,6 +6,7 @@
     cursor: pointer;
     border-radius: 5px;
     color: black;
+    width: 100%;
 }
 
 .custom-file-upload::-webkit-file-upload-button {
@@ -18,5 +19,6 @@
     width: 100%;    
     margin-bottom: 20px;
 }
-
-
+ input {
+     width: 100%;
+ }

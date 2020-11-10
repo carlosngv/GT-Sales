@@ -21,5 +21,9 @@ export class EmailService {
       email: email
     }).pipe(catchError(this.processHttpMsgService.handleError));
   }
+  
+  sendOrderEmail(data:any): Observable<any> {
+    return this.http.post<any>(baseURL + 'sendOrder', data).pipe(catchError(this.processHttpMsgService.handleError));
+  }
 
 }

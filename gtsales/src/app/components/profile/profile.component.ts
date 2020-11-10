@@ -61,7 +61,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       email: [this.client['client_email'], Validators.required],
       birthday: [(this.client['client_birthday']), Validators.required],
       country: [this.client['client_country'], Validators.required],
-      credits: [this.client['client_credits_qty']]
+      credits: [this.client['client_credits_qty']],
     });
   }
 
@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       client_email: this.clientForm.value.email,
       client_birthday: this.clientForm.value.birthday,
       image: this.file,
-      client_country: this.clientForm.value.country
+      client_country: this.clientForm.value.country,
     }
     this.userService.updateUser(this.client).subscribe(res => {
       console.log(res);

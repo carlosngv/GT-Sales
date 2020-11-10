@@ -1,0 +1,19 @@
+<div class="container-list" fxFlex="100%" fxLayout="column">
+    <h1>Top publicaciones con más likes</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Vendedor</th>
+            <th scope="col">Cantidad de dislikes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of items">
+            <td>{{item.product_name}}</td>
+            <td>{{item.client_name}}  {{item.client_lastname}}</td>
+            <td>{{item.dislikes_qty}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

@@ -47,7 +47,8 @@ export class ComplaintFormComponent implements OnInit {
     this.publicationService.newComplaint(this.newComplaint).subscribe((data) => {
       console.log(data);
     });
-    //this.dialogRef.close();
+    this.complaintForm.reset();
+    this.dialogRef.close();
   }
 
 }

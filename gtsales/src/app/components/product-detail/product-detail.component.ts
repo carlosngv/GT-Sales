@@ -12,6 +12,8 @@ import { Client } from "../../shared/client";
 import { MatDialog } from "@angular/material/dialog";
 import { ChatComponent } from "../chat/chat.component";
 import { ComplaintFormComponent } from "../complaint-form/complaint-form.component";
+import { CartService } from '../../services/cart.service';
+import { NewPurchaseComponent } from '../new-purchase/new-purchase.component';
 @Component({
   selector: "app-product-detail",
   templateUrl: "./product-detail.component.html",
@@ -25,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
   params: number;
   publication_detail_id: number;
   client: Client;
+  blocked: boolean;
 
   newComment = {
     publication_comment_content: "",
@@ -42,6 +45,7 @@ export class ProductDetailComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     private chatService: ChatService,
+    private cartService: CartService,
     @Inject("baseURL") public baseURL
   ) {
     
@@ -50,6 +54,17 @@ export class ProductDetailComponent implements OnInit {
   createForm() {
     this.commentForm = this.fb.group({
       content: [""],
+    });
+  }
+
+  newPurchase(){
+    this.cartService.newPurchase({client_id: this.client_id}).subscribe(data => {
+      console.log(data);
+    });
+    this.dialog.open(NewPurchaseComponent, {
+      width:"300px",
+      height: "240px",
+      data: this.publication['product_id']
     });
   }
 
@@ -101,6 +116,13 @@ export class ProductDetailComponent implements OnInit {
 
     this.publicationService.getPublication(this.params).then((res) => {
       this.publication = res;
+      console.log(this.publication)
+      if(this.publication['blocked'] === 'false') {
+        this.blocked = false;
+      } else {
+        this.blocked = true;
+      }
+      
       this.userService
         .getUser(this.publication["client_id"])
         .subscribe((res) => {

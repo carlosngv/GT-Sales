@@ -14,12 +14,17 @@
             <a mat-menu-item routerLink="/home" routerLinkActive="active">
                 <mat-icon>home</mat-icon>Principal
             </a>
-            <a mat-menu-item (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+            <a mat-menu-item (click)="openLoginForm()" routerLinkActive="active" *ngIf="!(authService.isLogged() || authService.isAdminLogged())">
                 <mat-icon>login</mat-icon>Iniciar Sesión
             </a>
-            <a mat-menu-item (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+            <a mat-menu-item (click)="openSignupForm()" routerLinkActive="active" *ngIf="!(authService.isLogged() || authService.isAdminLogged())">
                 <mat-icon>book_online</mat-icon>Registrate
             </a>
+            <a mat-button routerLink="/admin/reports"  *ngIf="authService.isAdminLogged()">
+                <mat-icon>list</mat-icon> Reportes
+            </a>
+           
+            
             <a mat-menu-item routerLink="/products" *ngIf="authService.isLogged()">
                 <mat-icon>storefront</mat-icon> Tienda
             </a>
@@ -29,10 +34,13 @@
             <a mat-menu-item routerLink="/profile" routerLinkActive="active" *ngIf="authService.isLogged()">
                 <mat-icon>face</mat-icon> Perfil
             </a>
-            <a mat-menu-item routerLinkActive="active" *ngIf="authService.isLogged()">
+            <a mat-menu-item routerLink="shoppingCart" *ngIf="authService.isLogged()">
                 <mat-icon>shopping_cart</mat-icon> Carrito
             </a>
-            <a mat-menu-item (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged()">
+            <a mat-button routerLink="/admin/main" *ngIf="authService.isAdminLogged()">
+                <mat-icon>app_blocking</mat-icon> Denuncias
+            </a>
+            <a mat-menu-item (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged() || authService.isAdminLogged()">
                 Cerrar Sesión
             </a>
         </div>
@@ -43,11 +51,17 @@
             <a mat-button routerLink="/home" routerLinkActive="active">
                 <mat-icon>home</mat-icon>Principal
             </a>
-            <a mat-button (click)="openLoginForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+            <a mat-button (click)="openLoginForm()" routerLinkActive="active" *ngIf="!(authService.isLogged() || authService.isAdminLogged())">
                 <mat-icon>login</mat-icon>Iniciar Sesión
             </a>
-            <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!authService.isLogged()">
+            <a mat-button (click)="openSignupForm()" routerLinkActive="active" *ngIf="!(authService.isLogged() || authService.isAdminLogged())">
                 <mat-icon>book_online</mat-icon>Registrate
+            </a>
+            <a mat-button routerLink="/admin/main" *ngIf="authService.isAdminLogged()">
+                <mat-icon>app_blocking</mat-icon> Denuncias
+            </a>
+            <a mat-button routerLink="/admin/reports" *ngIf="authService.isAdminLogged()">
+                <mat-icon>list</mat-icon> Reportes
             </a>
             <a mat-button routerLink="/products" *ngIf="authService.isLogged()">
                 <mat-icon>storefront</mat-icon> Tienda
@@ -61,7 +75,7 @@
             <a mat-button routerLink="shoppingCart" *ngIf="authService.isLogged()">
                 <mat-icon>shopping_cart</mat-icon> Carrito
             </a>
-            <a mat-button (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged()">
+            <a mat-button (click)="logout()" routerLinkActive="active" *ngIf="authService.isLogged() || authService.isAdminLogged()">
                 Cerrar Sesión
             </a>
         </div>

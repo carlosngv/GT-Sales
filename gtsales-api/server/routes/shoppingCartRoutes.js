@@ -12,6 +12,12 @@ shoppingCartRouter.post('/purchaseProduct', async (req, res) => {
     await db.Open(newPurchaseDetail, [product_id, purchase_id,product_qty], true)
         .then(res => console.log(res), err => console.log(err));
 
+    let updateProductPurchases = ` 
+    update product set purchases = (purchases + 1) where product_id = :product_id
+    `
+
+    await db.Open(updateProductPurchases, [product_id], true)
+        .then(res => console.log(res), err => console.log(err));
 
     res.json({
         message: 'Successfully purchsed!'
@@ -21,7 +27,8 @@ shoppingCartRouter.post('/purchaseProduct', async (req, res) => {
 shoppingCartRouter.post('/newPurchase', async (req, res) => {
     const { client_id } = req.body;
     let newPurchase = ` 
-        insert into purchase (client_id) values (:client_id)
+    insert into purchase(client_id) select :client_id from dual
+    where not exists (select * from purchase where (client_id = :client_id))
     `
     await db.Open(newPurchase, [client_id], true).then((res) => {
         console.log(res);
@@ -30,6 +37,22 @@ shoppingCartRouter.post('/newPurchase', async (req, res) => {
     res.status(200).json({
         message: "Purchase ok!"
     });
+});
+
+shoppingCartRouter.get('/purchase/:id', async (req,res) => {
+    const {id} = req.params;
+    let query  = `
+        select purchase_id from purchase where client_id = :id
+    `
+    purchases = await db.Open(query, [id], false);
+    let purchaseAux;
+    purchases.rows.map((purchase) => {
+        purchaseAux = purchase[0]
+    });
+    res.status(200).json({
+        purchase_id: purchaseAux
+    });
+
 });
 
 shoppingCartRouter.get('/clientPurchases', async (req, res) => {
@@ -120,5 +143,44 @@ shoppingCartRouter.delete('/deletePurchases', async (req, res) => { // Puede sim
 
 }); 
 
+shoppingCartRouter.get('/purchaseTotal/:id', async (req, res) => {
+    const {id} = req.params;
+    let query = `
+        select SUM(pd.subtotal) as Total from purchase_detail pd, purchase p 
+        where p.purchase_id = :id
+        group by p.purchase_id
+    `
+    let totalAux;
+    aux = await db.Open(query, [id], false);
+    aux.rows.map((total) => {
+        totalAux = total[0];
+    });
 
+    res.status(200).json({
+        total: totalAux
+    });
+
+});
+
+shoppingCartRouter.patch('/purchaseOrder', async (req, res) => {
+    const {total, client_id, purchase_id} = req.body
+    console.log(req.body);
+    let purchase = `  
+    update clientp set
+    client_credits_qty = (client_credits_qty - :total) where client_id = :id_client
+    `;
+
+    await db.Open(purchase, [total, client_id], true);
+
+    let deleteOrder = `
+    delete from purchase_detail where purchase_id = :purchase_id
+    `
+
+    await db.Open(deleteOrder, [purchase_id], true);
+
+    res.status(200).json({
+        message: 'Purchase successfully made!'
+    })
+
+});
 module.exports = shoppingCartRouter;

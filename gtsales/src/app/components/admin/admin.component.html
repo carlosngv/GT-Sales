@@ -1,0 +1,21 @@
+<div fxFlex="100%" class="container" fxLayout="column" fxLayoutGap="30px" >
+    <mat-expansion-panel *ngFor="let complaint of complaints">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Producto: {{complaint.product_name}}
+            </mat-panel-title>
+            <mat-panel-description>
+                {{complaint.complaint_date}}
+                 
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <h2>Numero de publicación: {{complaint.publication_id}}</h2>
+        <h3>{{complaint.client_name}}  {{complaint.client_lastname}}</h3>
+        <p>{{complaint.complaint_description}}</p>
+        <div fxLayoutGap="30px" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column">
+            <button class="block" mat-button (click)="block(complaint.publication_id)">Bloquear publicación</button>
+            <button class="unblock" mat-button (click)="unblock(complaint.publication_id)">Desbloquear publicación</button>
+        </div>
+        
+    </mat-expansion-panel>
+</div>

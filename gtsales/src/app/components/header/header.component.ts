@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.client = JSON.parse(localStorage['CurrentClient']);
+    //this.client = JSON.parse(localStorage['CurrentClient']);
 
   }
 
@@ -37,16 +37,19 @@ export class HeaderComponent implements OnInit {
   }
   openLoginForm() {
     const ref = this.dialog.open(LoginComponent, {
-      width: '500px',
+      width: '340px',
       height: '400px'
     });
-    ref.afterClosed().subscribe(() => {
-      this.client = JSON.parse(localStorage['CurrentClient']);
-    })
+ 
   }
 
   logout() {
-    this.authService.logout();
+    if(this.authService.isLogged()) {
+      this.authService.logout();
+    }
+    if(this.authService.isAdminLogged()) {
+      this.authService.logoutAdmin();
+    }
   }
 
   

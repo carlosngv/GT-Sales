@@ -12,11 +12,12 @@ const productRouter = require('./routes/productRoutes');
 const publicationRouter = require('./routes/publicationRoutes');
 const chatRouter = require('./routes/chatRoutes');
 const shoppingCartRouter = require('./routes/shoppingCartRoutes');
-
+const reportsRouter = require('./routes/reports');
 // Socket
 const serverHTTP = require('http').Server(app);
 const io = require('socket.io')(serverHTTP);
 const db = require("./config/db");
+const mailRouter = require('./mail/mail');
 
 
 io.on('connection', (socket) => {
@@ -57,12 +58,14 @@ serverHTTP.listen(app.get('port'), () => {
 });
 
 
+app.use('/', mailRouter);
 app.use('/clients', clientRouter); 
 app.use('/countries', countryRoute); 
 app.use('/products', productRouter);
 app.use('/publications', publicationRouter);
 app.use('/chat', chatRouter);
 app.use('/cart', shoppingCartRouter);
+app.use('/reports', reportsRouter);
 
 
 app.use('/uploads', express.static(path.resolve('uploads'))); // Important to locate images

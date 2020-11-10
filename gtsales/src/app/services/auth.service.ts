@@ -58,6 +58,25 @@ export class AuthService {
     .pipe(catchError(this.processHttpMsgService.handleError));
   }
 
+  logAdmin(user, password) {
+    let admin = JSON.stringify({user, password});
+    localStorage.setItem("Admin", admin);
+  }
+
+  isAdminLogged(): boolean {
+    let storedUser = localStorage.getItem("Admin");
+    if (!isNullOrUndefined(storedUser)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  logoutAdmin() {
+    localStorage.removeItem("Admin");
+    this.router.navigate(['/home']);
+  }
+
   // Logout
   logout() {
     localStorage.removeItem("CurrentClient");

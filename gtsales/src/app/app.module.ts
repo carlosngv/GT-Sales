@@ -29,6 +29,14 @@ import { ProductsComponent } from './components/products/products.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { ComplaintFormComponent } from './components/complaint-form/complaint-form.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { NewPurchaseComponent } from './components/new-purchase/new-purchase.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ToptCreditsComponent } from './components/top-credits/topt-credits.component';
+import { TopComplaintsComponent } from './components/top-complaints/top-complaints.component';
+import { TopLikesComponent } from './components/top-likes/top-likes.component';
+import { TopDislikesComponent } from './components/top-dislikes/top-dislikes.component';
+import { TopPublicationsComponent } from './components/top-publications/top-publications.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +56,14 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     ChatComponent,
     ComplaintFormComponent,
     ShoppingCartComponent,
+    NewPurchaseComponent,
+    AdminComponent,
+    ReportsComponent,
+    ToptCreditsComponent,
+    TopComplaintsComponent,
+    TopLikesComponent,
+    TopDislikesComponent,
+    TopPublicationsComponent,
   ],
   imports: [
     BrowserModule,

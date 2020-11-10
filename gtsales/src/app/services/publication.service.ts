@@ -52,6 +52,21 @@ export class PublicationService {
     .pipe(catchError(this.processHttpMsgService.handleError));
   }
 
+  getComplaints(): Observable<Complaint[]>{
+    return this.http.get<Complaint[]>(baseURL + 'publications/complaints/allComplaints')
+    .pipe(catchError(this.processHttpMsgService.handleError));
+  }
+
+  blockPublication(id): any {
+    return this.http.get<any>(baseURL + 'publications/publication/' + id + '/block')
+    .pipe(catchError(this.processHttpMsgService.handleError));
+  }
+
+  unblockPublication(id): any {
+    return this.http.get<any>(baseURL + 'publications/publication/' + id + '/unblock')
+    .pipe(catchError(this.processHttpMsgService.handleError));
+  }
+
   newProduct(product: Product): Observable<any> {
     console.log(product);
     const fd = new FormData();

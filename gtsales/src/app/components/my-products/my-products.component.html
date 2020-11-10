@@ -10,8 +10,8 @@
             </a>
         </div>
     </div>
-    <div fxFlex *ngIf="publications" class="img-container">
-        <mat-grid-list cols="2" rowHeight="200px" gutterSize="10px">
+    <div fxFlex *ngIf="publications" class="img-container" fxLayout.xs="column">
+        <mat-grid-list cols="2" cols.xs="1" rowHeight="200px" gutterSize="10px">
             <mat-list fxFlex>
                 <mat-grid-tile *ngFor="let publication of publications" [routerLink]="['/productDetail', publication.publication_id, publication.publication_detail_id]" appHighlight>
                     <img height="340px" src="{{baseURL + publication.product_photo}}" alt={{publication.product_name}}>

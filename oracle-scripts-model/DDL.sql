@@ -221,8 +221,84 @@ select SUM(pd.subtotal) as Total from purchase_detail pd, purchase p
 where pd.purchase_id = p.purchase_id 
 group by p.purchase_id;
 
-
 select * from purchase_detail;
 
+alter table purchase_detail modify product_qty number not null;
+
 --- delete purchases from order when paid...
-delete from purchase_detail where purchase_id= 21;
+delete from purchase_detail where purchase_id = 21;
+
+
+insert into purchase(client_id) select 141 from dual
+where not exists (select * from purchase where (client_id = 141));
+
+alter table product add purchases number default 0;
+
+select * from product;
+
+update product set purchases = (purchases + 1) where product_id = ;
+
+select purchase_id from purchase where client_id = 141
+
+
+
+alter table publication add blocked varchar2(20) default 'false';
+select * from publication;
+
+update  publication set blocked = 'true' where publication_id=3;
+
+
+
+
+
+
+
+
+---- RESPORTS
+
+--- Likes
+select pd.likes_qty, p.product_name, c.client_name, c.client_lastname 
+from clientp c, publication pub, product p, publication_detail pd 
+where c.client_id = pub.client_id and pd.publication_id = pub.publication_id
+and p.product_id = pub.product_id and  rownum <=10 order by pd.likes_qty desc;
+
+
+
+-- Dislikes
+select pd.dislikes_qty, p.product_name, c.client_name, c.client_lastname 
+from clientp c, publication pub, product p, publication_detail pd 
+where c.client_id = pub.client_id and pd.publication_id = pub.publication_id
+and p.product_id = pub.product_id and  rownum <=10 order by pd.dislikes_qty desc;
+
+-- More complaints
+
+select c.client_name, c.client_lastname, c.client_email, c.client_birthday, COUNT(c.client_id) as complaints
+from complaint co, clientp c 
+where co.client_id = c.client_id and rownum <=10
+group by c.client_name, c.client_lastname, c.client_email, c.client_birthday, c.client_id
+order by complaints desc
+;
+
+-- top publications
+select c.client_name, c.client_lastname, c.client_email, c.client_birthday, count(c.client_email) as products
+from clientp c, publication p
+where p.client_id = c.client_id and rownum <=10
+group by c.client_name, c.client_lastname, c.client_email, c.client_birthday
+order by products desc
+
+-- top credits
+
+select client_name, client_lastname, client_email, client_birthday, client_credits_qty from clientp
+where rownum <=10 order by client_credits_qty desc
+UNION
+select client_name, client_lastname, client_email, client_birthday, client_credits_qty from clientp
+where rownum <=10 order by client_credits_qty asc
+
+;
+
+
+
+
+
+
+

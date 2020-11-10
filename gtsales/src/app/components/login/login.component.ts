@@ -34,31 +34,38 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(client_email, client_password) {
-    this.authService.login(client_email, client_password).subscribe((res) => {
-      if (res["msg"] == "true") {
-        this.client = res["client"];
-        console.log("CLIENT",this.client)
-        if (this.client["client_verified"] == "false") {
-          console.log('false');
+    console.log(client_email, client_password)
+    if (client_email === ('admin') && client_password ===('admin')) {
+      console.log('true');
+      this.authService.logAdmin(client_email, client_password);
+      this.router.navigate(["admin/main"]);
+    } else {
+      this.authService.login(client_email, client_password).subscribe((res) => {
+        if (res["msg"] == "true") {
+          this.client = res["client"];
+          console.log("CLIENT", this.client);
+          if (this.client["client_verified"] == "false") {
+            console.log("false");
+            this.dialog.open(LoginValidationComponent, {
+              width: "350px",
+              height: "220px",
+            });
+            return;
+          }
+          console.log("CLIENT ID:", this.client["client_id"]);
+          this.router.navigate(["profile"]);
+          this.authService.storeUser(this.client);
+          console.log(this.client["client_id"]);
+        } else {
+          console.log("false");
           this.dialog.open(LoginValidationComponent, {
             width: "350px",
             height: "220px",
           });
           return;
         }
-        console.log('CLIENT ID:',this.client["client_id"]);
-        this.router.navigate(["profile"]);
-        this.authService.storeUser(this.client);
-        console.log(this.client["client_id"]);
-      } else {
-        console.log('false');
-          this.dialog.open(LoginValidationComponent, {
-            width: "350px",
-            height: "220px",
-          });
-          return;
-      }
-    });
+      });
+    }
   }
 
   onSubmit() {

@@ -191,7 +191,7 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
   let { publicationID } = req.params;
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
-        p.product_unit_price, p.product_photo, pd.likes_qty, pd.dislikes_qty, pd.publication_detail_id from publication pub 
+        p.product_unit_price, p.product_photo, pd.likes_qty, pd.dislikes_qty, pd.publication_detail_id, pub.blocked from publication pub 
         join clientp c on pub.client_id > 0
         join product p on pub.product_id = p.product_id
         join publication_detail pd on pd.publication_id = pub.publication_id
@@ -211,7 +211,8 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
       product_photo: publication[7],
       likes_qty: publication[8],
       dislikes_qty: publication[9],
-      publication_detail_id: publication[10]
+      publication_detail_id: publication[10],
+      blocked: publication[11]
     };
     publicationArray.push(publicationSchema);
   });
@@ -325,13 +326,12 @@ publicationRouter.post("/newComplaint", async (req, res) => {
 publicationRouter.get('/complaints/allComplaints', async (req, res) => {
   let query = `
   select co.complaint_id, co.complaint_date, c.client_id, c.client_name, c.client_lastname, 
-  co.complaint_description, pub.product_id, p.product_name
+  co.complaint_description, pub.product_id, p.product_name, pub.publication_id
   from complaint co, publication pub, clientp c, product p 
   where co.client_id = c.client_id 
   and co.publication_id = pub.publication_id 
   and p.product_id = pub.product_id
   `
-  console.log('hola')
   let complaints = await db.Open(query, [], false);
   let complaintArray = [];
   complaints.rows.map((complaint) => {
@@ -344,7 +344,8 @@ publicationRouter.get('/complaints/allComplaints', async (req, res) => {
       client_lastname: complaint[4],
       complaint_description: complaint[5],
       product_id: complaint[6],
-      product_name: complaint[7]
+      product_name: complaint[7],
+      publication_id: complaint[8]
     }
     complaintArray.push(complaintSchema);
   });
@@ -357,7 +358,35 @@ publicationRouter.get('/complaints/allComplaints', async (req, res) => {
 
 });
 
+publicationRouter.get('/publication/:id/block', async(req,res) => {
+  const {id} = req.params;
+  console.log(id);
 
+  let query =`
+  update publication set blocked = 'true' where publication_id=:id
+  `
+  await db.Open(query, [id], true);
+
+  res.status(200).json({
+    message: 'Successfully blocked!'
+  })
+
+});
+
+publicationRouter.get('/publication/:id/unblock', async(req,res) => {
+  const {id} = req.params;
+  console.log(id);
+
+  let query =`
+  update publication set blocked = 'false' where publication_id=:id
+  `
+  await db.Open(query, [id], true);
+
+  res.status(200).json({
+    message: 'Successfully unblocked!'
+  })
+
+});
 
 
 
