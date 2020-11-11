@@ -289,16 +289,17 @@ order by products desc
 -- top credits
 
 select client_name, client_lastname, client_email, client_birthday, client_credits_qty from clientp
-where rownum <=10 order by client_credits_qty desc
+where rownum <=5
 UNION
 select client_name, client_lastname, client_email, client_birthday, client_credits_qty from clientp
-where rownum <=10 order by client_credits_qty asc
+where rownum <=5 order by client_credits_qty desc
 
 ;
 
 
 
 
+select * from clientp
 
-
+update clientp set client_credits_qty = 10000 where client_id = 101
 

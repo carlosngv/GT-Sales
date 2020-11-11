@@ -33,7 +33,7 @@
                         <p><strong>{{publication.product_name | uppercase}}</strong></p>
                         <h2 class="mat-title">{{publication.product_detail}}</h2>
                         <h4 *ngIf="publication">Precio: Q.{{publication.product_unit_price}}</h4>
-
+                        <h4 *ngIf="publication">Categoría: {{publication.product_category}}</h4>
                     </mat-card-title>
 
                 </mat-card-header>

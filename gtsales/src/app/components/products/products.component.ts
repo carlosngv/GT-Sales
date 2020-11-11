@@ -35,6 +35,15 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  orderByCategory() {
+    this.publications = this.publications.sort(function(a, b){
+      if(a.product_category < b.product_category) { return -1; }
+      if(a.product_category > b.product_category) { return 1; }
+      return 0;
+  });
+  console.log(this.publications);
+  }
+
   ngOnInit(): void {
   }
 

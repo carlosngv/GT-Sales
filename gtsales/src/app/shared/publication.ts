@@ -12,4 +12,5 @@ export class Publication {
     publication_detail_id: number;
     client_lastname?: string;
     blocked: string;
+    product_category?: string;
 }

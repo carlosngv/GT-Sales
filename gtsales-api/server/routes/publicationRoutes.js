@@ -125,9 +125,13 @@ publicationRouter.get("/others/:id", async (req, res) => {
   let { id } = req.params;
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
-        p.product_unit_price, p.product_photo, pd.publication_detail_id, c.client_lastname from publication pub, product p, clientp c, publication_detail pd 
+        p.product_unit_price, p.product_photo, pd.publication_detail_id, c.client_lastname, pc.product_category_name
+        from publication pub, product p, clientp c, publication_detail pd, product_category pc
         where pub.product_id = p.product_id and pub.client_id != :id 
-        and c.client_id = pub.client_id and pd.publication_id = pub.publication_id
+        and c.client_id = pub.client_id 
+        and pd.publication_id = pub.publication_id
+        and pc.product_category_id = p.product_category
+        
         
     `;
 
@@ -146,7 +150,8 @@ publicationRouter.get("/others/:id", async (req, res) => {
       product_unit_price: publication[6],
       product_photo: publication[7],
       publication_detail_id: publication[8],
-      client_lastname: publication[9]
+      client_lastname: publication[9],
+      product_category: publication[10]
     };
     publicationArray.push(publicationSchema);
   });
@@ -191,10 +196,12 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
   let { publicationID } = req.params;
   let query = `
         select pub.publication_id, pub.product_id, pub.client_id, c.client_name, p.product_name, p.product_detail,
-        p.product_unit_price, p.product_photo, pd.likes_qty, pd.dislikes_qty, pd.publication_detail_id, pub.blocked from publication pub 
+        p.product_unit_price, p.product_photo, pd.likes_qty, pd.dislikes_qty, pd.publication_detail_id, pub.blocked, cat.product_category_name 
+        from publication pub 
         join clientp c on pub.client_id > 0
         join product p on pub.product_id = p.product_id
         join publication_detail pd on pd.publication_id = pub.publication_id
+        join product_category cat on p.product_category = cat.product_category_id
         where pub.publication_id = :publicationID
     `;
   let publications = await db.Open(query, [publicationID], false);
@@ -212,7 +219,8 @@ publicationRouter.get("/publication/:publicationID", async (req, res) => {
       likes_qty: publication[8],
       dislikes_qty: publication[9],
       publication_detail_id: publication[10],
-      blocked: publication[11]
+      blocked: publication[11],
+      product_category: publication[12]
     };
     publicationArray.push(publicationSchema);
   });
