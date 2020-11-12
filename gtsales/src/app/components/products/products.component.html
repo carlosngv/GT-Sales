@@ -1,11 +1,10 @@
     <div class="products-container" fxLayout="column" fxLayoutGap="1px" fxLayoutAlign="start start">
         <h1 class="mat-display-1">Productos Disponibles</h1>
         <hr>
-        <div fxFlex="100%" fxLayout="row" fxLayoutGap="20px">
+        <div fxFlex="100%" fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
             <button mat-button (click)="orderDesc()">Ordenar Ascendente</button>
             <button mat-button (click)="orderAsc()">Ordenar Decendente</button>
             <button mat-button (click)="orderByCategory()">Ordenar Categorias</button>
-
         </div>
        
 

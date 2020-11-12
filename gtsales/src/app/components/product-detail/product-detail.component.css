@@ -30,10 +30,6 @@
     resize: none;
 }
 
-mat-divider {
-    color:black;
-    background: black;
-}
 
 .profile-picture {
     width: 50px;
@@ -58,7 +54,7 @@ mat-divider {
 .vendor-card {
     color:black;
     background-color: white;
-    max-height: 300px;
+    max-height: 350px;
 }
 
 .comment-card {

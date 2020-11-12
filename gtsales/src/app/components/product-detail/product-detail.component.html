@@ -2,7 +2,7 @@
     <div class="container" fxLayout="row" fxflex="100%" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="space-evenly center" fxLayoutGap="100px" fxLayoutGap.xs="30px">
         <div fxFlex="50%" *ngIf="publication" >
-            <mat-card>
+            <mat-card style="margin-right: 15px">
                 <img mat-card-image src="{{baseURL + publication.product_photo}}">
                 <button mat-button (click)="newPurchase()">
                     <mat-icon>shopping_cart</mat-icon>

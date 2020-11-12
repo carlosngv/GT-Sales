@@ -224,6 +224,6 @@ Instalación de Ngrok en MacOS:
 ```bash
     brew cask install ngrok
 ```
-Gracias a esta herramienta se logró la completa funcionalidad de la aplicación dentro de un dispositivo Android.
+Gracias a esta herramienta se logró la completa funcionalidad de la aplicación dentro de un dispositivo Android. A continuación, una imagen de la simulación dentro de Android Studio:
 
-![AndroidApp](./screenshots/android-app.png)
+![AndroidApp](./screenshots/phone-view.png)

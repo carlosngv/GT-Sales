@@ -25,7 +25,7 @@ Dentro del perfil del usuario, es posible actualizar la información, a excepci�
 
 La sección de tienda, contiene todos los productos ajenos al usuario logueado. Podrá entrar a cada publicación, y si lo desea, agregar el producto al carrito.
 
-![store](./documentation/screenshots/store.png)
+![Store](./documentation/screenshots/store.png)
 
 ### Publicaciones
 
@@ -33,12 +33,12 @@ La sección de tienda, contiene todos los productos ajenos al usuario logueado. 
 
 Todo usuario es capaz de realizar nuevas publicaciones, ingresar sus productos, detallando su precio, descripción, nombre y demás información como se muestra a continuación
 
-![newPublication](./documentation/screenshots/new-publication.png)
+![NewPublication](./documentation/screenshots/new-publication.png)
 
 
 La publicación en sí contiene toda la información del producto y de quién lo vende. Asimismo, el usuario podrá dejar un comentario, darle me gusta o no me gusta a la publicación, chatear con el vendedor y si es necesario, denunciar la publicación.
 
-![product-detail](./documentation/screenshots/product-detail.png)
+![ProductDetail](./documentation/screenshots/product-detail.png)
 
 ### Chat
 
@@ -49,7 +49,7 @@ El chat con el vendedor es en tiempo real, es decir, reacción instantánea. Est
 
 Una publicación denunciada y bloqueada por el encargado:
 
- ![blocked](./documentation/screenshots/blocked.png)
+ ![Blocked](./documentation/screenshots/blocked.png)
 
 
 ### Sección de comentarios
@@ -64,7 +64,12 @@ Todos los usuarios son libres de opinar, podrán dejar su like o dislike, depend
 
 Al momento de que el usuario ingresa a la publicación, puede realizar una compra, dando click en el botón del carrito de compras de lado de los likes y dislikes. Tendrá la opción de elegir la cantidad del producto a comprar.
 
- ![cart](./documentation/screenshots/cart.png)
+ ![ShoppingCart](./documentation/screenshots/cart.png)
 
 Se detalla el nombre del producto, cantidad, su precio unitario y resultado del subtotal por producto. Al final de la lista de productos se observa el total de la orden. Al momento de realizar la compra se le sustraen los creditos al usuario y se le envia un correo con la factura de la orden, especificando los productos y el precio.
 
+## Dispositivo móvil
+
+La aplicación está para dispositivos móviles, en este caso Android. La .apk está a disposición y a continuación una vista previa dentro del dispositivo:
+
+ ![PhoneView](./documentation/screenshots/phone-view.png)
