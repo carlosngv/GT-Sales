@@ -126,7 +126,7 @@ Para está aplicación, el evento utilizado tiene el nombre de *newMessage* dent
 
 El chat se ve de la siguiente forma:
 
-![SignUp](./screenshots/chat-dialog.png)
+![Chat](./documentation/screenshots/chat-dialog.png)
 
 
 ## Compra de producto
